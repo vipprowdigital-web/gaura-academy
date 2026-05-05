@@ -13,6 +13,12 @@ const contactSchema = new Schema({
     type: String,
     required: true,
   },
+  course:{
+    type:String,
+    required:false,
+    enum:[]
+  },
+
   location: {
     type: String,
     required: true,

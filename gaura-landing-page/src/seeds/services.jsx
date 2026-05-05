@@ -28,9 +28,9 @@ export const services = [
     icon: <FaHandsHelping className={`${textColor2}`} size={30} />,
   },
   {
-    title: "Global Standard Curriculum",
+    title: "Beginner Friendly Courses ",
     description:
-      "Our international-level syllabus keeps you ahead with modern beauty techniques, tools, and latest industry practices.",
+      "Our courses are designed for beginners as well as learners who want to upgrade their skills. Step-by-step training makes learning easy, clear, and practical.",
     icon: <FaGlobe className={`${textColor2}`} size={30} />,
   },
   {

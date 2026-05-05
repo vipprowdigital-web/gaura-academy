@@ -2,7 +2,7 @@
 
 import Courses from "@/components/Courses";
 import HeroSection from "@/components/HeroSection";
-import Stats from "@/components/Stats";
+
 import Services from "@/components/Services";
 import CareerTransformation from "@/components/CareerTransformation";
 import StudentWorkGallery from "@/components/StudentWorkGallery";
@@ -15,6 +15,7 @@ import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import BottomNavbar from "@/components/BottomNavbar";
 import { Toaster } from "react-hot-toast";
+import AboutAcademy from "@/components/About";
 
 export default function Home() {
   const contactRef = useRef(null);
@@ -28,18 +29,21 @@ export default function Home() {
   };
   // bg-[#F7F7EE]
   return (
-    <main className="bg-white">
+    <main className="bg-black">
       <HeroSection
         onContactClick={scrollToContact}
         onCourseClick={scrollToCourses}
       />
-      <Stats />
+      
+      <AboutAcademy/>
       <div ref={exploreCourses}>
         <Courses onContactClick={scrollToContact} />
       </div>
       <Services />
+
       <CareerTransformation />
       <StudentWorkGallery />
+      <Testimonials/>
       {/* <Placement /> */}
       {/* <Accreditions /> */}
       <AdminProcessTimeline />
