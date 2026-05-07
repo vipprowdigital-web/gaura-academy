@@ -14,7 +14,7 @@ export const socials = [
   },
     {
       name: "Google",
-      link: "https://g.page/r/https://share.google/Qe90v94SLBg9zx2mR", // ← apni Google My Business link yahan lagao
+      link: "https://share.google/MwIv1YrvOEwWCL6os", // ← apni Google My Business link yahan lagao
       icon: <FaGoogle size={18} />,
     },
 ];

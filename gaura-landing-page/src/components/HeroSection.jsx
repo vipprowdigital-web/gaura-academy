@@ -12,19 +12,19 @@ const YELLOW = "#ffd72e";
 const slides = [
   {
     src: "/assets/images/gaura/makeup_image_1080x1350.png",
-    heading1: "BEAUTY",
+    heading1: "GAURA MAKEUP ACADEMY",
     heading2: "IS ALL ABOUT YOU",
     sub: "Enhancing your natural beauty with Gaura Academy. Discover the perfect blend of elegance and individuality with our expertise.",
   },
   {
     src: "/assets/images/gaura/ChatGPT Image May 6, 2026, 04_52_24 PM.png",
-    heading1: "BEAUTY",
+    heading1: "GAURA MAKEUP ACADEMY",
     heading2: "PICTURE-PERFECT RADIANCE",
     sub: "Gaura Academy's signature makeup artistry — leaving you with a flawless and radiant look that lasts.",
   },
   {
     src: "/assets/images/gaura/third.png",
-    heading1: "BEAUTY",
+    heading1: "GAURA MAKEUP ACADEMY",
     heading2: "YOUR STORY, YOUR GLOW",
     sub: "From bridal to editorial — our certified artists craft looks that celebrate who you truly are.",
   },
@@ -85,13 +85,13 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
         .hero-h1 {
           font-family: 'Cormorant Garamond', Georgia, serif;
           font-weight: 300;
-          line-height: 0.88;
+          line-height: 1.1;
           letter-spacing: -0.01em;
           color: #ffffff;
-          font-size: clamp(4rem, 18vw, 10rem);
+          font-size: clamp(2rem, 10vw, 6rem);
         }
         @media (min-width: 1024px) {
-          .hero-h1 { font-size: clamp(5rem, 10vw, 10rem); }
+          .hero-h1 { font-size: clamp(2rem, 4vw, 3.5rem); }
         }
         .hero-h2 {
           font-family: 'Montserrat', sans-serif;
@@ -232,7 +232,7 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
                 onMouseEnter={(e) => e.currentTarget.style.background = GOLD}
                 onMouseLeave={(e) => e.currentTarget.style.background = YELLOW}
               >
-                Make an Appointment
+                Join Our Academy
               </button>
               <button
                 onClick={onContactClick}

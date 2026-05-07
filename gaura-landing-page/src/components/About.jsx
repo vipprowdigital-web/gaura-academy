@@ -4,16 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 // ── Gaura Academy Brand Colors ────────────────────────────────
-const BLACK  = "#000000";
-const GOLD   = "#dcad6a";
+const BLACK = "#000000";
+const GOLD = "#dcad6a";
 const YELLOW = "#ffd72e";
 
 // Stats shown in the about section
 const stats = [
   { number: "500+", label: "Students Trained" },
-  { number: "8+",   label: "Years of Excellence" },
-  { number: "40+",  label: "Expert Instructors" },
-  { number: "96%",  label: "Placement Rate" },
+  { number: "8+", label: "Years of Excellence" },
+  { number: "40+", label: "Expert Instructors" },
+  { number: "96%", label: "Placement Rate" },
 ];
 
 // Key pillars / why us points
@@ -32,8 +32,10 @@ function useInView(threshold = 0.18) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -45,7 +47,7 @@ function useInView(threshold = 0.18) {
 function Counter({ target, inView }) {
   const [count, setCount] = useState(0);
   const numeric = parseInt(target.replace(/\D/g, ""));
-  const suffix  = target.replace(/[0-9]/g, "");
+  const suffix = target.replace(/[0-9]/g, "");
 
   useEffect(() => {
     if (!inView) return;
@@ -53,18 +55,25 @@ function Counter({ target, inView }) {
     const step = Math.ceil(numeric / 50);
     const t = setInterval(() => {
       start += step;
-      if (start >= numeric) { setCount(numeric); clearInterval(t); }
-      else setCount(start);
+      if (start >= numeric) {
+        setCount(numeric);
+        clearInterval(t);
+      } else setCount(start);
     }, 28);
     return () => clearInterval(t);
   }, [inView, numeric]);
 
-  return <>{count}{suffix}</>;
+  return (
+    <>
+      {count}
+      {suffix}
+    </>
+  );
 }
 
 export default function AboutAcademy({ onCourseClick }) {
   const [sectionRef, sectionInView] = useInView(0.1);
-  const [statsRef,   statsInView]   = useInView(0.3);
+  const [statsRef, statsInView] = useInView(0.3);
 
   return (
     <section
@@ -111,16 +120,17 @@ export default function AboutAcademy({ onCourseClick }) {
       `}</style>
 
       {/* ── Decorative top shimmer ──────────────────────────── */}
-      <div style={{
-        height: "1px",
-        background: `linear-gradient(to right, transparent, ${YELLOW}66, transparent)`,
-      }} />
+      <div
+        style={{
+          height: "1px",
+          background: `linear-gradient(to right, transparent, ${YELLOW}66, transparent)`,
+        }}
+      />
 
       {/* ════════════════════════════════════════════════════════
           MAIN CONTENT — 2 col on desktop, stacked on mobile
       ════════════════════════════════════════════════════════ */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[70vh]">
-
         {/* ── LEFT — Image panel ───────────────────────────── */}
         <div
           className={`relative w-full about-reveal-left ${sectionInView ? "visible" : ""}`}
@@ -131,19 +141,23 @@ export default function AboutAcademy({ onCourseClick }) {
         >
           {/* Main image */}
           <Image
-  src="/assets/images/gaura/ChatGPT Image May 7, 2026, 12_18_12 PM.png"
-  alt="Gaura Makeup Academy"
-  fill
-  className="object-cover object-[center_20%]"
-  style={{ transform: "scale(0.9)" }}
-  priority
-/>
+            src="/assets/images/gaura/ChatGPT Image May 7, 2026, 12_18_12 PM.png"
+            alt="Gaura Makeup Academy"
+            fill
+            className="object-cover object-[center_20%]"
+            style={{ transform: "scale(0.9)" }}
+            priority
+          />
 
           {/* Dark overlay */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)",
-          }} />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)",
+            }}
+          />
 
           {/* Floating badge — years of excellence */}
           {/* <div
@@ -172,12 +186,17 @@ export default function AboutAcademy({ onCourseClick }) {
           </div> */}
 
           {/* Corner bracket decoration */}
-          <div style={{
-            position: "absolute", top: "20px", left: "20px",
-            width: "40px", height: "40px",
-            borderTop: `2px solid ${YELLOW}`,
-            borderLeft: `2px solid ${YELLOW}`,
-          }} />
+          <div
+            style={{
+              position: "absolute",
+              top: "20px",
+              left: "20px",
+              width: "40px",
+              height: "40px",
+              borderTop: `2px solid ${YELLOW}`,
+              borderLeft: `2px solid ${YELLOW}`,
+            }}
+          />
         </div>
 
         {/* ── RIGHT — Text content ─────────────────────────── */}
@@ -191,59 +210,77 @@ export default function AboutAcademy({ onCourseClick }) {
           {/* Tag */}
           <div className="flex items-center gap-3 mb-5">
             <div style={{ width: "32px", height: "1px", background: GOLD }} />
-            <p style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.66rem", fontWeight: 700,
-              letterSpacing: "0.28em", color: GOLD,
-              textTransform: "uppercase",
-            }}>
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.66rem",
+                fontWeight: 700,
+                letterSpacing: "0.28em",
+                color: GOLD,
+                textTransform: "uppercase",
+              }}
+            >
               Trust &amp; Excellence
             </p>
           </div>
 
           {/* Main heading */}
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
-            fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
-            fontWeight: 300, lineHeight: 1.1,
-            color: "#ffffff", marginBottom: "6px",
-          }}>
+          <h2
+            style={{
+              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
+              fontWeight: 300,
+              lineHeight: 1.1,
+              color: "#ffffff",
+              marginBottom: "6px",
+            }}
+          >
             About{" "}
-            <em style={{ color: GOLD, fontStyle: "italic" }}>
-              Gaura Makeup
-            </em>
-            <br />Academy
+            <em style={{ color: GOLD, fontStyle: "italic" }}>Gaura Makeup</em>
+            <br />
+            Academy
           </h2>
 
           {/* Gold rule */}
-          <div style={{
-            width: "52px", height: "2px",
-            background: `linear-gradient(to right, ${YELLOW}, ${GOLD})`,
-            borderRadius: "2px", margin: "14px 0 20px",
-          }} />
+          <div
+            style={{
+              width: "52px",
+              height: "2px",
+              background: `linear-gradient(to right, ${YELLOW}, ${GOLD})`,
+              borderRadius: "2px",
+              margin: "14px 0 20px",
+            }}
+          />
 
           {/* Body text */}
-          <p style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontSize: "clamp(0.82rem, 1.2vw, 0.92rem)",
-            color: `${GOLD}bb`, lineHeight: 1.85,
-            marginBottom: "28px",
-          }}>
+          <p
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: "clamp(0.82rem, 1.2vw, 0.92rem)",
+              color: `${GOLD}bb`,
+              lineHeight: 1.85,
+              marginBottom: "28px",
+            }}
+          >
             Gaura Makeup Academy is a professional beauty training institute
             dedicated to providing high-quality makeup education. We focus on
             hands-on training, modern techniques, and real-world skills that
             help students become confident makeup artists.
           </p>
 
-          <p style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
-            fontSize: "clamp(1.1rem, 2vw, 1.45rem)",
-            fontWeight: 400, fontStyle: "italic",
-            color: GOLD, lineHeight: 1.5,
-            marginBottom: "28px",
-            borderLeft: `3px solid ${YELLOW}`,
-            paddingLeft: "16px",
-          }}>
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontSize: "clamp(1.1rem, 2vw, 1.45rem)",
+              fontWeight: 400,
+              fontStyle: "italic",
+              color: GOLD,
+              lineHeight: 1.5,
+              marginBottom: "28px",
+              borderLeft: `3px solid ${YELLOW}`,
+              paddingLeft: "16px",
+            }}
+          >
             "Not just teaching makeup — but building successful careers."
           </p>
 
@@ -268,15 +305,20 @@ export default function AboutAcademy({ onCourseClick }) {
                   e.currentTarget.style.background = "transparent";
                 }}
               >
-                <span className="pillar-icon" style={{ color: GOLD, fontSize: "0.9rem", flexShrink: 0 }}>
+                <span
+                  className="pillar-icon"
+                  style={{ color: GOLD, fontSize: "0.9rem", flexShrink: 0 }}
+                >
                   {p.icon}
                 </span>
                 <span
                   className="pillar-text"
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "0.8rem", fontWeight: 600,
-                    color: `${GOLD}cc`, letterSpacing: "0.02em",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    color: `${GOLD}cc`,
+                    letterSpacing: "0.02em",
                   }}
                 >
                   {p.text}
@@ -291,26 +333,36 @@ export default function AboutAcademy({ onCourseClick }) {
               onClick={onCourseClick}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
-                background: YELLOW, color: BLACK,
-                fontWeight: 700, fontSize: "0.72rem",
-                letterSpacing: "0.16em", textTransform: "uppercase",
-                padding: "13px 28px", borderRadius: "999px",
-                border: "none", cursor: "pointer",
+                background: YELLOW,
+                color: BLACK,
+                fontWeight: 700,
+                fontSize: "0.72rem",
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                padding: "13px 28px",
+                borderRadius: "999px",
+                border: "none",
+                cursor: "pointer",
                 transition: "background 0.25s",
               }}
-              onMouseEnter={(e) => e.currentTarget.style.background = GOLD}
-              onMouseLeave={(e) => e.currentTarget.style.background = YELLOW}
+              onMouseEnter={(e) => (e.currentTarget.style.background = GOLD)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = YELLOW)}
             >
               Explore Courses
             </button>
             <button
               style={{
                 fontFamily: "'Montserrat', sans-serif",
-                background: "transparent", color: GOLD,
-                fontWeight: 700, fontSize: "0.72rem",
-                letterSpacing: "0.16em", textTransform: "uppercase",
-                padding: "13px 28px", borderRadius: "999px",
-                border: `2px solid ${GOLD}`, cursor: "pointer",
+                background: "transparent",
+                color: GOLD,
+                fontWeight: 700,
+                fontSize: "0.72rem",
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                padding: "13px 28px",
+                borderRadius: "999px",
+                border: `2px solid ${GOLD}`,
+                cursor: "pointer",
                 transition: "all 0.25s",
               }}
               onMouseEnter={(e) => {
@@ -343,7 +395,8 @@ export default function AboutAcademy({ onCourseClick }) {
             style={{
               padding: "36px 20px",
               textAlign: "center",
-              borderRight: i < stats.length - 1 ? `1px solid ${GOLD}18` : "none",
+              borderRight:
+                i < stats.length - 1 ? `1px solid ${GOLD}18` : "none",
               borderBottom: i < 2 ? `1px solid ${GOLD}18` : "none",
               transition: "border-color 0.35s, box-shadow 0.35s",
               transitionDelay: `${i * 0.1}s`,
@@ -355,19 +408,26 @@ export default function AboutAcademy({ onCourseClick }) {
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "clamp(2.2rem, 5vw, 3.4rem)",
-                fontWeight: 300, color: GOLD,
-                lineHeight: 1, letterSpacing: "-0.02em",
+                fontWeight: 300,
+                color: GOLD,
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
                 transition: "color 0.35s",
               }}
             >
               <Counter target={stat.number} inView={statsInView} />
             </p>
-            <p style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.68rem", fontWeight: 600,
-              letterSpacing: "0.18em", textTransform: "uppercase",
-              color: `${GOLD}66`, marginTop: "8px",
-            }}>
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.68rem",
+                fontWeight: 600,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: `${GOLD}66`,
+                marginTop: "8px",
+              }}
+            >
               {stat.label}
             </p>
           </div>
@@ -375,10 +435,12 @@ export default function AboutAcademy({ onCourseClick }) {
       </div>
 
       {/* Decorative bottom shimmer */}
-      <div style={{
-        height: "1px",
-        background: `linear-gradient(to right, transparent, ${YELLOW}44, transparent)`,
-      }} />
+      <div
+        style={{
+          height: "1px",
+          background: `linear-gradient(to right, transparent, ${YELLOW}44, transparent)`,
+        }}
+      />
     </section>
   );
 }
