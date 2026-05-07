@@ -11,19 +11,19 @@ const YELLOW = "#ffd72e";
 // ── Slides — replace src with your actual images ──────────────
 const slides = [
   {
-    src: "/assets/images/gaura/93.png",
+    src: "/assets/images/gaura/makeup_image_1080x1350.png",
     heading1: "BEAUTY",
     heading2: "IS ALL ABOUT YOU",
     sub: "Enhancing your natural beauty with Gaura Academy. Discover the perfect blend of elegance and individuality with our expertise.",
   },
   {
-    src: "/assets/images/gaura/94.png",
+    src: "/assets/images/gaura/ChatGPT Image May 6, 2026, 04_52_24 PM.png",
     heading1: "BEAUTY",
     heading2: "PICTURE-PERFECT RADIANCE",
     sub: "Gaura Academy's signature makeup artistry — leaving you with a flawless and radiant look that lasts.",
   },
   {
-    src: "/assets/images/gaura/95.png",
+    src: "/assets/images/gaura/makeup_image2_1080x1350.png",
     heading1: "BEAUTY",
     heading2: "YOUR STORY, YOUR GLOW",
     sub: "From bridal to editorial — our certified artists craft looks that celebrate who you truly are.",

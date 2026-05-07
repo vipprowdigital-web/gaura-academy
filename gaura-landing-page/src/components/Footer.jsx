@@ -15,17 +15,17 @@ export default function Footer() {
   const details = [
     {
       name: "Address",
-      value: "Plot No. M-10 C.A, Veer Haqiqat Ray Marg, Rudrapur, Uttarakhand - 263153",
+      value: "32/6, Laxmi Road, Near Doon International School, Dalanwala, Dehradun",
       icon: <FaLocationDot size={20} style={{ color: GOLD }} />,
     },
     {
       name: "Phone",
-      value: "+1 (123) 456-7890",
+      value: "+91 70783 32794",
       icon: <FaPhoneAlt size={20} style={{ color: GOLD }} />,
     },
     {
       name: "Email",
-      value: "gauraacademy@gmail.com",
+      value: "gauramakeupstudioandacademy@gmail.com",
       icon: <SiGmail size={20} style={{ color: GOLD }} />,
     },
   ];

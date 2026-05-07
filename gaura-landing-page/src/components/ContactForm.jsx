@@ -7,11 +7,11 @@ const BLACK = "#000000";
 const GOLD = "#dcad6a";
 const YELLOW = "#ffd72e";
 
-const details = [
-  { name: "Address", value: "123 Main St, City, Country" },
-  { name: "Email", value: "gaura@gmail.com" },
-  { name: "Phone", value: "+91 2343433434" },
-];
+// const details = [
+//   { name: "Address", value: "32/6, Laxmi Road, Near Doon International School, Dalanwala, Dehradun, Uttarakhand 248001" },
+//   { name: "Email", value: "gauramakeupstudioandacademy@gmail.com" },
+//   { name: "Phone", value: "+91 70783 32794" },
+// ];
 
 const initialData = {
   name: "",
@@ -22,9 +22,9 @@ const initialData = {
 };
 
 const courseOptions = [
-  "Master in Cosmetology",
-  "Diploma in Cosmetology",
-  "Certificate in Cosmetology",
+  "Basic Makeup Course",
+  "Advanced Makeup Course",
+  "Makeup Master Class Program",
   "Bridal Makeup Course",
   "Hair Styling Course",
   "Nail Art Course",
@@ -173,7 +173,7 @@ export default function ContactForm() {
           <div style={{ width: "100%", height: "1px", background: `${GOLD}22` }} />
 
           {/* Contact details */}
-          <div className="flex flex-wrap gap-5 md:gap-10">
+          {/* <div className="flex flex-wrap gap-5 md:gap-10">
             {details.map((detail) => (
               <div key={detail.name}>
                 <h6 style={{
@@ -192,7 +192,7 @@ export default function ContactForm() {
                 </p>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <div style={{ width: "100%", height: "1px", background: `${GOLD}22` }} />
 

@@ -21,7 +21,7 @@ const contactSchema = new Schema({
 
   location: {
     type: String,
-    required: true,
+    required: false,
     enum: ["haldwani", "dehradun", "rudrapur", "bajpur"],
   },
   message: {

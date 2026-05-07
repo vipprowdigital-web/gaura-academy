@@ -131,7 +131,7 @@ export default function AboutAcademy({ onCourseClick }) {
         >
           {/* Main image */}
           <Image
-            src="/assets/images/gaura/94.png"
+            src="/assets/images/gaura/93.png"
             alt="Gaura Makeup Academy"
             fill
             className="object-cover object-center"

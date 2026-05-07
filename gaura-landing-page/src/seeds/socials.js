@@ -1,15 +1,14 @@
-import { GrInstagram } from "react-icons/gr";
-import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram, FaFacebookF } from "react-icons/fa";
 
 export const socials = [
   {
     name: "Instagram",
-    icon: <GrInstagram size={20} />,
-    link: "https://www.instagram.com/bellezarudrapur",
+    link: "https://www.instagram.com/gauramakeupacademyofficial?igsh=MWcxMTVxZm51dHJmZw==",
+    icon: <FaInstagram size={18} />,
   },
   {
-    name: "Youtube",
-    icon: <FaFacebookF size={20} />,
-    link: "https://www.facebook.com/people/Belleza-Beauty-School-Rudrapur/61584485860632/",
+    name: "Facebook",
+    link: "https://www.facebook.com/profile.php?id=61575418535158",
+    icon: <FaFacebookF size={18} />,
   },
 ];
