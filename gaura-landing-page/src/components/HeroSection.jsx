@@ -23,7 +23,7 @@ const slides = [
     sub: "Gaura Academy's signature makeup artistry — leaving you with a flawless and radiant look that lasts.",
   },
   {
-    src: "/assets/images/gaura/makeup_image2_1080x1350.png",
+    src: "/assets/images/gaura/third.png",
     heading1: "BEAUTY",
     heading2: "YOUR STORY, YOUR GLOW",
     sub: "From bridal to editorial — our certified artists craft looks that celebrate who you truly are.",

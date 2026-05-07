@@ -131,12 +131,13 @@ export default function AboutAcademy({ onCourseClick }) {
         >
           {/* Main image */}
           <Image
-            src="/assets/images/gaura/93.png"
-            alt="Gaura Makeup Academy"
-            fill
-            className="object-cover object-center"
-            priority
-          />
+  src="/assets/images/gaura/ChatGPT Image May 7, 2026, 12_18_12 PM.png"
+  alt="Gaura Makeup Academy"
+  fill
+  className="object-cover object-[center_20%]"
+  style={{ transform: "scale(0.9)" }}
+  priority
+/>
 
           {/* Dark overlay */}
           <div style={{
