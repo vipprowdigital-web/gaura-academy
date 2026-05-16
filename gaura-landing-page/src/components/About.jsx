@@ -141,7 +141,7 @@ export default function AboutAcademy({ onCourseClick }) {
         >
           {/* Main image */}
           <Image
-            src="/assets/images/gaura/ChatGPT Image May 7, 2026, 12_18_12 PM.png"
+            src="/assets/images/gaura/gaura-about.png"
             alt="Gaura Makeup Academy"
             fill
             className="object-cover object-[center_20%]"
