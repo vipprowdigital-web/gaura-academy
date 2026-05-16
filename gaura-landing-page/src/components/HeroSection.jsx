@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 
 // ── Brand Colors ──────────────────────────────────────────────
 const BLACK = "#000000";
-const GOLD  = "#dcad6a";
+const GOLD = "#dcad6a";
 const YELLOW = "#ffd72e";
 
 // ── Slides — replace src with your actual images ──────────────
@@ -34,11 +34,15 @@ const slides = [
 const imgVariants = {
   enter: (dir) => ({ scale: 1.06, opacity: 0, x: dir > 0 ? 40 : -40 }),
   center: {
-    scale: 1, opacity: 1, x: 0,
+    scale: 1,
+    opacity: 1,
+    x: 0,
     transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
   },
   exit: (dir) => ({
-    scale: 0.97, opacity: 0, x: dir < 0 ? 40 : -40,
+    scale: 0.97,
+    opacity: 0,
+    x: dir < 0 ? 40 : -40,
     transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
   }),
 };
@@ -50,20 +54,27 @@ const textContainer = {
 
 const textItem = {
   hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
-  exit:    { opacity: 0, y: -16, transition: { duration: 0.3 } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+  },
+  exit: { opacity: 0, y: -16, transition: { duration: 0.3 } },
 };
 
 export default function HeroSection({ onContactClick, onCourseClick }) {
   const [[current, dir], setCurrent] = useState([0, 1]);
   const [paused, setPaused] = useState(false);
 
-  const next = useCallback(() =>
-    setCurrent(([p]) => [(p + 1) % slides.length, 1]), []);
-  const prev = useCallback(() =>
-    setCurrent(([p]) => [(p - 1 + slides.length) % slides.length, -1]), []);
-  const goTo = useCallback((i) =>
-    setCurrent(([p]) => [i, i > p ? 1 : -1]), []);
+  const next = useCallback(
+    () => setCurrent(([p]) => [(p + 1) % slides.length, 1]),
+    [],
+  );
+  const prev = useCallback(
+    () => setCurrent(([p]) => [(p - 1 + slides.length) % slides.length, -1]),
+    [],
+  );
+  const goTo = useCallback((i) => setCurrent(([p]) => [i, i > p ? 1 : -1]), []);
 
   useEffect(() => {
     if (paused) return;
@@ -144,14 +155,16 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
       <div
         className="absolute inset-0 lg:hidden"
         style={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.15) 100%)",
+          background:
+            "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.15) 100%)",
         }}
       />
       {/* Desktop: left-side scrim */}
       <div
         className="absolute inset-0 hidden lg:block"
         style={{
-          background: "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 48%, rgba(0,0,0,0.05) 100%)",
+          background:
+            "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 48%, rgba(0,0,0,0.05) 100%)",
         }}
       />
       {/* Bottom fade always */}
@@ -204,9 +217,12 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
             {/* Yellow rule */}
             <motion.div
               variants={textItem}
-              style={{ width: "48px", height: "2px",
+              style={{
+                width: "48px",
+                height: "2px",
                 background: `linear-gradient(to right, ${YELLOW}, ${GOLD})`,
-                borderRadius: "2px" }}
+                borderRadius: "2px",
+              }}
             />
 
             {/* Body */}
@@ -220,29 +236,42 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
               className="flex flex-wrap gap-3 mt-1"
             >
               <button
-                onClick={onCourseClick}
+                onClick={onContactClick}
                 style={{
                   fontFamily: "'Montserrat', sans-serif",
-                  background: YELLOW, color: BLACK,
-                  fontWeight: 700, fontSize: "0.72rem",
-                  letterSpacing: "0.16em", textTransform: "uppercase",
-                  padding: "12px 24px", borderRadius: "999px", border: "none",
-                  cursor: "pointer", transition: "background 0.25s",
+                  background: YELLOW,
+                  color: BLACK,
+                  fontWeight: 700,
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  padding: "12px 24px",
+                  borderRadius: "999px",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "background 0.25s",
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.background = GOLD}
-                onMouseLeave={(e) => e.currentTarget.style.background = YELLOW}
+                onMouseEnter={(e) => (e.currentTarget.style.background = GOLD)}
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = YELLOW)
+                }
               >
                 Join Our Academy
               </button>
               <button
-                onClick={onContactClick}
+                onClick={onCourseClick}
                 style={{
                   fontFamily: "'Montserrat', sans-serif",
-                  background: "transparent", color: GOLD,
-                  fontWeight: 700, fontSize: "0.72rem",
-                  letterSpacing: "0.16em", textTransform: "uppercase",
-                  padding: "12px 24px", borderRadius: "999px",
-                  border: `2px solid ${GOLD}`, cursor: "pointer",
+                  background: "transparent",
+                  color: GOLD,
+                  fontWeight: 700,
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  padding: "12px 24px",
+                  borderRadius: "999px",
+                  border: `2px solid ${GOLD}`,
+                  cursor: "pointer",
                   transition: "all 0.25s",
                 }}
                 onMouseEnter={(e) => {
@@ -268,16 +297,29 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
       >
         {/* Prev */}
         <button
-          onClick={prev} aria-label="Previous"
+          onClick={prev}
+          aria-label="Previous"
           className="flex items-center justify-center rounded-full transition-all duration-200"
           style={{
-            width: "34px", height: "34px",
-            border: `1px solid ${GOLD}55`, color: GOLD, background: "transparent",
+            width: "34px",
+            height: "34px",
+            border: `1px solid ${GOLD}55`,
+            color: GOLD,
+            background: "transparent",
           }}
-          onMouseEnter={(e) => e.currentTarget.style.background = `${GOLD}22`}
-          onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+          onMouseEnter={(e) => (e.currentTarget.style.background = `${GOLD}22`)}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background = "transparent")
+          }
         >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
@@ -285,31 +327,47 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
         {/* Dots */}
         {slides.map((_, i) => (
           <button
-            key={i} onClick={() => goTo(i)}
+            key={i}
+            onClick={() => goTo(i)}
             aria-label={`Slide ${i + 1}`}
             style={{
               height: "7px",
               width: i === current ? "28px" : "7px",
               borderRadius: "999px",
               background: i === current ? YELLOW : `${GOLD}44`,
-              border: "none", cursor: "pointer",
-              transition: "all 0.35s ease", padding: 0,
+              border: "none",
+              cursor: "pointer",
+              transition: "all 0.35s ease",
+              padding: 0,
             }}
           />
         ))}
 
         {/* Next */}
         <button
-          onClick={next} aria-label="Next"
+          onClick={next}
+          aria-label="Next"
           className="flex items-center justify-center rounded-full transition-all duration-200"
           style={{
-            width: "34px", height: "34px",
-            border: `1px solid ${GOLD}55`, color: GOLD, background: "transparent",
+            width: "34px",
+            height: "34px",
+            border: `1px solid ${GOLD}55`,
+            color: GOLD,
+            background: "transparent",
           }}
-          onMouseEnter={(e) => e.currentTarget.style.background = `${GOLD}22`}
-          onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+          onMouseEnter={(e) => (e.currentTarget.style.background = `${GOLD}22`)}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background = "transparent")
+          }
         >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </button>
@@ -331,9 +389,6 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
     </section>
   );
 }
-
-
-
 
 // import { motion } from "framer-motion";
 // import Image from "next/image";
