@@ -32,7 +32,7 @@ const courseOptions = [
   "Other",
 ];
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState(initialData);
@@ -42,29 +42,40 @@ export default function ContactForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`${baseUrl}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (response.status === 201) {
-        toast.success("Message sent successfully!");
-        setFormData(initialData);
-      } else if (response.status === 422) {
-        toast.error(data.message || "Validation Failed.");
-      } else {
-        toast.error(data.message || "Failed to send message. Please try again.");
-      }
-    } catch (e) {
-      console.error("Error while sending message: ", e);
-      toast.error("Network error. Please try again.");
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  try {
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phoneNumber,
+      courseName: formData.courseInterest,
+      preferredLocation: "Dehradun",
+      message: formData.message,
+    };
+
+    const response = await fetch(`${baseUrl}/api/v1/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (response.status === 201 || response.ok) {
+      toast.success("Message sent successfully!");
+      setFormData(initialData);
+    } else if (response.status === 422 || response.status === 400) {
+      toast.error(data.message || "Validation Failed.");
+    } else {
+      toast.error(data.message || "Failed to send message. Please try again.");
+    }
+  } catch (e) {
+    console.error("Error while sending message: ", e);
+    toast.error("Network error. Please try again.");
+  }
+};
   const inputStyle = (name) => ({
     width: "100%",
     padding: "12px 14px",
@@ -114,33 +125,51 @@ export default function ContactForm() {
       <div className="flex flex-col items-center gap-2 text-center max-w-[560px] mb-2">
         <div className="flex items-center gap-3">
           <div style={{ width: "28px", height: "1px", background: GOLD }} />
-          <p style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontSize: "0.68rem", fontWeight: 600,
-            letterSpacing: "0.26em", color: GOLD, textTransform: "uppercase",
-          }}>
+          <p
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: "0.68rem",
+              fontWeight: 600,
+              letterSpacing: "0.26em",
+              color: GOLD,
+              textTransform: "uppercase",
+            }}
+          >
             Get in Touch
           </p>
           <div style={{ width: "28px", height: "1px", background: GOLD }} />
         </div>
-        <h2 style={{
-          fontFamily: "'Cormorant Garamond', Georgia, serif",
-          fontSize: "clamp(2rem, 5vw, 3.4rem)",
-          fontWeight: 300, color: "#ffffff", lineHeight: 1.08,
-        }}>
+        <h2
+          style={{
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontSize: "clamp(2rem, 5vw, 3.4rem)",
+            fontWeight: 300,
+            color: "#ffffff",
+            lineHeight: 1.08,
+          }}
+        >
           <em style={{ color: GOLD, fontStyle: "italic" }}>Contact us</em>
         </h2>
-        <div style={{
-          width: "48px", height: "2px",
-          background: `linear-gradient(to right, ${YELLOW}, ${GOLD})`,
-          borderRadius: "2px", margin: "4px auto 0",
-        }} />
-        <p style={{
-          fontFamily: "'Montserrat', sans-serif",
-          fontSize: "0.83rem", color: `${GOLD}bb`,
-          lineHeight: 1.8, marginTop: "6px",
-        }}>
-          Connecting with Gaura Academy is your first step toward a successful beauty career.
+        <div
+          style={{
+            width: "48px",
+            height: "2px",
+            background: `linear-gradient(to right, ${YELLOW}, ${GOLD})`,
+            borderRadius: "2px",
+            margin: "4px auto 0",
+          }}
+        />
+        <p
+          style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: "0.83rem",
+            color: `${GOLD}bb`,
+            lineHeight: 1.8,
+            marginTop: "6px",
+          }}
+        >
+          Connecting with Gaura Academy is your first step toward a successful
+          beauty career.
         </p>
       </div>
 
@@ -156,21 +185,31 @@ export default function ContactForm() {
         >
           {/* Card header */}
           <div>
-            <h3 style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: "1.6rem", fontWeight: 300, color: "#ffffff",
-            }}>
+            <h3
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: "1.6rem",
+                fontWeight: 300,
+                color: "#ffffff",
+              }}
+            >
               Send Us a <em style={{ color: YELLOW }}>Message</em>
             </h3>
-            <p style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.78rem", color: `${GOLD}99`, marginTop: "4px",
-            }}>
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.78rem",
+                color: `${GOLD}99`,
+                marginTop: "4px",
+              }}
+            >
               We believe every future artist deserves clarity before they begin.
             </p>
           </div>
 
-          <div style={{ width: "100%", height: "1px", background: `${GOLD}22` }} />
+          <div
+            style={{ width: "100%", height: "1px", background: `${GOLD}22` }}
+          />
 
           {/* Contact details */}
           {/* <div className="flex flex-wrap gap-5 md:gap-10">
@@ -194,16 +233,20 @@ export default function ContactForm() {
             ))}
           </div> */}
 
-          <div style={{ width: "100%", height: "1px", background: `${GOLD}22` }} />
+          <div
+            style={{ width: "100%", height: "1px", background: `${GOLD}22` }}
+          />
 
           {/* ── Form ─────────────────────────────────────────── */}
           <form onSubmit={handleSubmit} className="w-full flex flex-col gap-5">
-
             {/* Name */}
             <div className="relative w-full">
               <input
-                type="text" name="name" value={formData.name}
-                onChange={handleChange} required
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
                 onFocus={() => setFocused("name")}
                 onBlur={() => setFocused("")}
                 style={inputStyle("name")}
@@ -214,8 +257,11 @@ export default function ContactForm() {
             {/* Email */}
             <div className="relative w-full">
               <input
-                type="email" name="email" value={formData.email}
-                onChange={handleChange} required
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
                 onFocus={() => setFocused("email")}
                 onBlur={() => setFocused("")}
                 style={inputStyle("email")}
@@ -226,45 +272,77 @@ export default function ContactForm() {
             {/* Phone */}
             <div className="relative w-full">
               <input
-                type="text" name="phoneNumber" value={formData.phoneNumber}
-                onChange={handleChange} required
+                type="text"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                required
                 onFocus={() => setFocused("phoneNumber")}
                 onBlur={() => setFocused("")}
                 style={inputStyle("phoneNumber")}
               />
-              <label style={labelStyle("phoneNumber", formData.phoneNumber)}>Phone Number</label>
+              <label style={labelStyle("phoneNumber", formData.phoneNumber)}>
+                Phone Number
+              </label>
             </div>
 
             {/* Course Interest */}
             <div className="relative w-full">
               <select
-                name="courseInterest" value={formData.courseInterest}
-                onChange={handleChange} required
+                name="courseInterest"
+                value={formData.courseInterest}
+                onChange={handleChange}
+                required
                 onFocus={() => setFocused("courseInterest")}
                 onBlur={() => setFocused("")}
-                style={{ ...inputStyle("courseInterest"), appearance: "none", cursor: "pointer" }}
+                style={{
+                  ...inputStyle("courseInterest"),
+                  appearance: "none",
+                  cursor: "pointer",
+                }}
               >
                 <option value="" disabled hidden />
                 {courseOptions.map((course) => (
-                  <option key={course} value={course}>{course}</option>
+                  <option key={course} value={course}>
+                    {course}
+                  </option>
                 ))}
               </select>
-              <label style={labelStyle("courseInterest", formData.courseInterest)}>
+              <label
+                style={labelStyle("courseInterest", formData.courseInterest)}
+              >
                 Course Interest
               </label>
-              <div style={{
-                position: "absolute", right: "12px", top: "50%",
-                transform: "translateY(-50%)", pointerEvents: "none", color: GOLD,
-              }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <div
+                style={{
+                  position: "absolute",
+                  right: "12px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  pointerEvents: "none",
+                  color: GOLD,
+                }}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </div>
-              <p style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: "0.7rem", color: `${GOLD}77`,
-                marginTop: "4px", paddingLeft: "2px",
-              }}>
+              <p
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: "0.7rem",
+                  color: `${GOLD}77`,
+                  marginTop: "4px",
+                  paddingLeft: "2px",
+                }}
+              >
                 ✦ Which course are you interested in?
               </p>
             </div>
@@ -272,13 +350,17 @@ export default function ContactForm() {
             {/* Message */}
             <div className="relative w-full">
               <textarea
-                name="message" value={formData.message}
-                onChange={handleChange} rows={5}
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={5}
                 onFocus={() => setFocused("message")}
                 onBlur={() => setFocused("")}
                 style={inputStyle("message")}
               />
-              <label style={labelStyle("message", formData.message)}>Message</label>
+              <label style={labelStyle("message", formData.message)}>
+                Message
+              </label>
             </div>
 
             {/* Submit */}
@@ -287,12 +369,15 @@ export default function ContactForm() {
               className="w-60 py-3 rounded-xl font-bold tracking-widest uppercase transition-all duration-300"
               style={{
                 fontFamily: "'Montserrat', sans-serif",
-                background: YELLOW, color: BLACK,
-                letterSpacing: "0.15em", fontSize: "0.78rem",
-                border: "none", cursor: "pointer",
+                background: YELLOW,
+                color: BLACK,
+                letterSpacing: "0.15em",
+                fontSize: "0.78rem",
+                border: "none",
+                cursor: "pointer",
               }}
-              onMouseEnter={(e) => e.currentTarget.style.background = GOLD}
-              onMouseLeave={(e) => e.currentTarget.style.background = YELLOW}
+              onMouseEnter={(e) => (e.currentTarget.style.background = GOLD)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = YELLOW)}
             >
               Send Message ✦
             </button>
@@ -302,7 +387,6 @@ export default function ContactForm() {
     </section>
   );
 }
-
 
 // "use client";
 // import { useState } from "react";
@@ -319,7 +403,7 @@ export default function ContactForm() {
 
 // const details = [
 //   { name: "Address", value: "123 Main St, City, Country" },
-//   { name: "Email", value: "belleza@gmail.com" },
+//   { name: "Email", value: "gaura@gmail.com" },
 //   { name: "Phone", value: "+91 2343433434" },
 // ];
 
@@ -399,7 +483,7 @@ export default function ContactForm() {
 //         title="Get in Touch"
 //         subtitle="Contact Us"
 //         titleColor="#826955"
-//         description="Connecting with Belleza is your first step toward a successful beauty career."
+//         description="Connecting with gaura is your first step toward a successful beauty career."
 //       />
 //       <div className="w-full grid grid-cols-1 lg:grid-cols-2 py-10 sm:p-10">
 //         <div className="w-full flex flex-col items-start gap-3 bg-white rounded-2xl shadow-lg p-5 sm:p-7">

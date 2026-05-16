@@ -90,7 +90,7 @@ export default function BottomNavbar({ onContactClick, onCourseClick }) {
 //   ];
 //   const handleWhatsAppClick = () => {
 //     const phoneNumber = process.env.WHATSAPP_NUMBER;
-//     const message = "Hello! I would like to know more about Belleza Courses.";
+//     const message = "Hello! I would like to know more about gaura Courses.";
 //     const encodedMessage = encodeURIComponent(message);
 //     window.open(
 //       `https://wa.me/${phoneNumber}?text=${encodedMessage}`,

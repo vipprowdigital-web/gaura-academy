@@ -252,10 +252,10 @@ function FeatureCard({ label, icon, index }) {
 //     >
 //       <Heading
 //         title="Empowering Beauty Through Excellence"
-//         subtitle="Discover the World of Belleza"
+//         subtitle="Discover the World of gaura"
 //         titleColor={color3}
 //         subtitleColor={color3}
-//         description="Welcome to Belleza Beauty School, your gateway to world-class beauty education
+//         description="Welcome to gaura Beauty School, your gateway to world-class beauty education
 // guided by industry-certified trainers and global techniques."
 //       />
 //       <div className="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 py-10">

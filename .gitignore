@@ -1,0 +1,9 @@
+node_modules/ 
+gaura-backend/node_modules/ 
+gaura-console/node_modules/ 
+gaura-landing-page/node_modules/ 
+.env 
+gaura-backend/.env 
+gaura-console/.env 
+gaura-landing-page/.env 
+gaura-landing-page/.expo/ 

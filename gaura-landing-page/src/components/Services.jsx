@@ -165,11 +165,11 @@ function ServiceCard({ service }) {
 //   return (
 //     <section className="w-full p-10 flex-col justify-center items-center">
 //       <Heading
-//         title="The Belleza Advantage"
-//         subtitle="Why Choose Belleza?"
+//         title="The gaura Advantage"
+//         subtitle="Why Choose gaura?"
 //         titleColor={color2}
 //         subtitleColor={color2}
-//         description="Belleza Beauty School offers a world-class learning experience with expert trainers, luxury classrooms, and hands-on training. Our globally recognized curriculum and career-focused approach help students master beauty skills and confidently step into the professional industry."
+//         description="gaura Beauty School offers a world-class learning experience with expert trainers, luxury classrooms, and hands-on training. Our globally recognized curriculum and career-focused approach help students master beauty skills and confidently step into the professional industry."
 //       />
 //       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-10 sm:px-0 lg:px-20 py-5 sm:py-10">
 //         {services.map((service) => (

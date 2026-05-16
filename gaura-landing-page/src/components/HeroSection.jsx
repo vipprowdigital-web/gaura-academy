@@ -362,10 +362,10 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
 //       {/* Left Side */}
 //       <div className="absolute top-5 left-5 sm:left-10">
 //         <Image
-//           src="/assets/images/logos/belleza_logo.svg"
+//           src="/assets/images/logos/gaura_logo.svg"
 //           width={100}
 //           height={100}
-//           alt="Belleza Logo"
+//           alt="gaura Logo"
 //           priority
 //           loading="eager"
 //           className="w-20 h-20 sm:w-30 sm:h-30"
@@ -381,7 +381,7 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
 //           className="text-left ml-2 px-3 border-l-4 border-[#1f2937] text-[#1f2937] text-sm font-semibold"
 //           variants={itemVariants}
 //         >
-//           Belleza Beauty School
+//           gaura Beauty School
 //         </motion.p>
 //         <motion.h1
 //           className="text-4xl md:text-6xl lg:text-7xl xl:text-7xl font-bold text-[#1f2937] "
