@@ -237,7 +237,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <div className=" text-sidebar-primary-foreground flex aspect-square size-10 items-center justify-center rounded-lg">
               <img
-                src="/public/logo/GAURA.png"
+                src="/logo/GAURA.png"
                 alt=""
                 className="absolute inset-0 mt-3 h-full w-full object-contain"
               />
