@@ -1,6 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import {
+  FaPhoneAlt,
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedinIn,
+} from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
+import { FaLocationDot, FaXTwitter } from "react-icons/fa6";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { fetchAppConfig } from "@/utils/placeholders";
 
 // ── Gaura Academy Brand Colors ────────────────────────────────
 const BLACK = "#000000";
@@ -37,6 +48,63 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000";
 export default function ContactForm() {
   const [formData, setFormData] = useState(initialData);
   const [focused, setFocused] = useState("");
+  const [config, setConfig] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchAppConfig().then((c) => {
+      if (!cancelled) setConfig(c);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const appName = config?.appName || "Gaura Academy";
+  const phoneNumber = config?.phoneNumber || "+91 70783 32794";
+  const email = config?.email || "gauramakeupstudioandacademy@gmail.com";
+  const addresses =
+    Array.isArray(config?.companyAddress) && config.companyAddress.length > 0
+      ? config.companyAddress
+      : [
+          {
+            address:
+              "32/6, Laxmi Road, Near Doon International School, Dalanwala, Dehradun",
+            googleMapLocation: "",
+          },
+        ];
+
+  const details = [
+    ...addresses
+      .filter((a) => a?.address)
+      .map((a) => ({
+        name: "Address",
+        value: a.address,
+        link: a.googleMapLocation || "#",
+        icon: <FaLocationDot size={18} />,
+      })),
+    {
+      name: "Phone",
+      value: phoneNumber,
+      link: `tel:${phoneNumber}`,
+      icon: <FaPhoneAlt size={18} />,
+    },
+    {
+      name: "Email",
+      value: email,
+      link: `mailto:${email}`,
+      icon: <SiGmail size={18} />,
+    },
+  ];
+
+  const socials = [
+    { name: "Facebook", link: config?.facebookLink, icon: <FaFacebookF /> },
+    { name: "Instagram", link: config?.instagramLink, icon: <FaInstagram /> },
+    { name: "Twitter", link: config?.twitterLink, icon: <FaXTwitter /> },
+    { name: "YouTube", link: config?.youtubeLink, icon: <FaYoutube /> },
+    { name: "WhatsApp", link: config?.whatsAppLink, icon: <IoLogoWhatsapp /> },
+    { name: "LinkedIn", link: config?.linkedinLink, icon: <FaLinkedinIn /> },
+  ].filter((s) => s.link);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -174,7 +242,103 @@ const handleSubmit = async (e) => {
       </div>
 
       {/* ── Form Card ────────────────────────────────────────── */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 py-10 sm:p-10">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-10 sm:p-10">
+        {/* ── App config details (left) ───────────────────────── */}
+        <div className="w-full flex flex-col justify-center gap-8">
+          <div className="flex flex-col gap-1">
+            <h3
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: "1.9rem",
+                fontWeight: 300,
+                color: "#ffffff",
+              }}
+            >
+              {appName}
+            </h3>
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "0.82rem",
+                color: `${GOLD}99`,
+                lineHeight: 1.8,
+              }}
+            >
+              Reach out to us using the details below or send a message using
+              the form.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {details.map((detail) => (
+              <a
+                key={detail.name}
+                href={detail.link}
+                target={detail.name === "Address" ? "_blank" : "_self"}
+                rel={detail.name === "Address" ? "noopener noreferrer" : undefined}
+                className="group flex items-start gap-4"
+              >
+                <div
+                  className="shrink-0 rounded-full p-3 transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: `${YELLOW}18`,
+                    border: `1px solid ${GOLD}44`,
+                    color: GOLD,
+                  }}
+                >
+                  {detail.icon}
+                </div>
+                <div>
+                  <h6
+                    style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontSize: "0.62rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.18em",
+                      color: YELLOW,
+                      textTransform: "uppercase",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    {detail.name}
+                  </h6>
+                  <p
+                    className="transition-colors duration-300 group-hover:text-white"
+                    style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontSize: "0.85rem",
+                      color: GOLD,
+                      fontWeight: 500,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {detail.value}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {socials.length > 0 && (
+            <div className="flex flex-wrap items-center gap-3">
+              {socials.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="rounded-full p-2 text-lg transition-all duration-300 hover:bg-[#ffd72e]! hover:text-black!"
+                  style={{ background: `${GOLD}22`, color: GOLD }}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* ── Form (right) ────────────────────────────────────── */}
         <div
           className="w-full flex flex-col items-start gap-4 rounded-2xl p-6 sm:p-8"
           style={{

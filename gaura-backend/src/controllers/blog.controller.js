@@ -127,6 +127,12 @@ export const getAllActiveBlogs = async (req, res) => {
 
 export const getBlogById = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id))
+      return res
+        .status(404)
+        .json({ success: false, message: "Blog not found" });
+
+    // NOTE: not filtered by isActive — the console edit form uses this route.
     const blog = await Blog.findById(req.params.id)
       .populate("category", "name slug")
       .lean();

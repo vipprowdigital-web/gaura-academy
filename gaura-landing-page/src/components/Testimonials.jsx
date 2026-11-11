@@ -116,35 +116,8 @@ export default function Testimonials() {
     return () => clearInterval(t);
   }, [paused, next, testimonials.length]);
 
-  if (loading) {
-    return (
-      <section
-        className="relative w-full overflow-hidden"
-        style={{ background: "#050300", padding: "80px 0 90px" }}
-      >
-        <div className="w-full max-w-6xl mx-auto px-6 sm:px-10 text-center">
-          <p style={{ color: GOLD, fontSize: "1rem" }}>
-            Loading testimonials...
-          </p>
-        </div>
-      </section>
-    );
-  }
-
-  if (!testimonials.length) {
-    return (
-      <section
-        className="relative w-full overflow-hidden"
-        style={{ background: "#050300", padding: "80px 0 90px" }}
-      >
-        <div className="w-full max-w-6xl mx-auto px-6 sm:px-10 text-center">
-          <p style={{ color: GOLD, fontSize: "1rem" }}>
-            No testimonials available.
-          </p>
-        </div>
-      </section>
-    );
-  }
+  // Hide the whole section while loading or when there is nothing to show
+  if (loading || !testimonials.length) return null;
 
   const t = testimonials[active];
 

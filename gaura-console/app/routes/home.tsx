@@ -5,8 +5,8 @@ import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Gaura Academy Admin Console" },
-    { name: "description", content: "Welcome to Gaura Academy!" },
+    { title: "Gaura Makeup Academy" },
+    { name: "description", content: "Welcome to Gaura Makeup Academy!" },
   ];
 }
 

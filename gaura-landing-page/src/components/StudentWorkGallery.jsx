@@ -49,6 +49,9 @@ export default function StudentWorkGallery() {
     fetchGallery();
   }, []);
 
+  // Hide the whole section while loading or when there is nothing to show
+  if (loading || photos.length === 0) return null;
+
   return (
     <section className="w-full my-10 p-5 sm:p-10 flex flex-col items-center justify-center">
       <Heading
@@ -59,23 +62,11 @@ export default function StudentWorkGallery() {
         description="Our students start with zero experience and become skilled makeup artists through hands-on training."
       />
 
-      {loading ? (
-        <div className="w-full py-16 flex items-center justify-center">
-          <p className="text-sm text-[#dcad6a]">Loading gallery...</p>
-        </div>
-      ) : photos.length > 0 ? (
-        <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-5 py-10">
-          {photos.map((photo, index) => (
-            <GalleryCard key={photo.id || index} photo={photo} index={index} />
-          ))}
-        </div>
-      ) : (
-        <div className="w-full py-16 flex items-center justify-center">
-          <p className="text-sm text-[#dcad6a]">
-            No gallery images available.
-          </p>
-        </div>
-      )}
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-5 py-10">
+        {photos.map((photo, index) => (
+          <GalleryCard key={photo.id || index} photo={photo} index={index} />
+        ))}
+      </div>
     </section>
   );
 }

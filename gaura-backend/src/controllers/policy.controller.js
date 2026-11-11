@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import mongoose from "mongoose";
 import Policy from "../models/policy.model.js";
 
 /* =====================================================
@@ -205,7 +206,7 @@ export const destroyPolicyById = async (req, res) => {
 export const getAllActivePolicies = async (req, res) => {
   try {
     const policies = await Policy.find({ isActive: true })
-      .select("title")
+      .select("title slug")
       .sort({ createdAt: -1 })
       .lean();
 
@@ -223,12 +224,17 @@ export const getAllActivePolicies = async (req, res) => {
 /** 🔍 Get Active Policy by ID (Public) */
 export const getActivePolicyById = async (req, res) => {
   try {
-    const policy = await Policy.findById(req.params.id).lean();
+    // Accepts either a Mongo ObjectId or a slug
+    const { id } = req.params;
+    const query = mongoose.isValidObjectId(id)
+      ? { $or: [{ _id: id }, { slug: id }] }
+      : { slug: id };
+    const policy = await Policy.findOne({ ...query, isActive: true }).lean();
 
     if (!policy) {
       return res
         .status(404)
-        .json({ message: `No active policy found for id: ${id}` });
+        .json({ message: `No active policy found for: ${id}` });
     }
 
     return res.status(200).json({

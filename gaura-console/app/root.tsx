@@ -20,7 +20,13 @@ import { store } from "~/redux/store";
 import { Toaster } from "~/components/ui/sonner";
 // import { ModeToggle } from "~/components/mode-toggle";
 
+export const meta: Route.MetaFunction = () => [
+  { title: "Gaura Makeup Academy" },
+];
+
 export const links: Route.LinksFunction = () => [
+  { rel: "icon", type: "image/png", href: "/logo/GAURA.png" },
+  { rel: "apple-touch-icon", href: "/logo/GAURA.png" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",

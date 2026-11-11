@@ -17,6 +17,26 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000";
 export default function Footer() {
   const [config, setConfig] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [policies, setPolicies] = useState([]);
+
+  useEffect(() => {
+    const fetchPolicies = async () => {
+      try {
+        const response = await fetch(`${baseUrl}/api/v1/policy/public`, {
+          method: "GET",
+          cache: "no-store",
+        });
+        const result = await response.json();
+        if (response.ok && Array.isArray(result.data)) {
+          setPolicies(result.data.filter((p) => p.slug || p._id));
+        }
+      } catch (error) {
+        console.error("Error fetching policies:", error);
+      }
+    };
+
+    fetchPolicies();
+  }, []);
 
   useEffect(() => {
     const fetchAppConfig = async () => {
@@ -214,16 +234,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Copyright */}
+      {/* Bottom row: copyright | policies (center) | developed by */}
       <div
-        className="w-full flex flex-col md:flex-row justify-between items-center"
+        className="w-full flex flex-col md:grid md:grid-cols-3 items-center"
         style={{
           borderTop: `1px solid ${GOLD}22`,
           paddingTop: "16px",
           marginTop: "8px",
         }}
       >
-        <p className="text-md pt-10 md:pb-10 text-center" style={{ color: `${GOLD}66` }}>
+        <p className="text-md pt-10 md:pb-10 text-center md:text-left md:justify-self-start" style={{ color: `${GOLD}66` }}>
           &copy; {new Date().getFullYear()}{" "}
           <span className="capitalize" style={{ color: GOLD }}>
             {appName}.{" "}
@@ -231,11 +251,26 @@ export default function Footer() {
           All Rights Reserved.
         </p>
 
+        <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 pt-3 md:pt-10 md:pb-10 md:justify-self-center">
+          {policies.map((policy) => (
+            <a
+              key={policy._id}
+              href={`/policy/${policy.slug || policy._id}`}
+              className="text-md transition-colors duration-300"
+              style={{ color: `${GOLD}99` }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = YELLOW)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = `${GOLD}99`)}
+            >
+              {policy.title}
+            </a>
+          ))}
+        </div>
+
         <a
           href="https://vipprow.com/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-md pb-15 sm:pb-0 pt-3 transition-colors duration-300"
+          className="text-md pb-15 sm:pb-0 pt-3 md:pt-10 md:pb-10 md:justify-self-end transition-colors duration-300"
           style={{ color: `${GOLD}66` }}
           onMouseEnter={(e) => (e.currentTarget.style.color = YELLOW)}
           onMouseLeave={(e) => (e.currentTarget.style.color = `${GOLD}66`)}

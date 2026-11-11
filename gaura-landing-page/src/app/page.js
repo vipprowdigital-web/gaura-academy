@@ -16,6 +16,7 @@ import Footer from "@/components/Footer";
 import BottomNavbar from "@/components/BottomNavbar";
 import { Toaster } from "react-hot-toast";
 import AboutAcademy from "@/components/About";
+import Articles from "@/components/Articles";
 
 export default function Home() {
   const contactRef = useRef(null);
@@ -34,8 +35,8 @@ export default function Home() {
         onContactClick={scrollToContact}
         onCourseClick={scrollToCourses}
       />
-      
-      <AboutAcademy/>
+
+      <AboutAcademy />
       <div ref={exploreCourses}>
         <Courses onContactClick={scrollToContact} />
       </div>
@@ -43,10 +44,11 @@ export default function Home() {
 
       <CareerTransformation />
       <StudentWorkGallery />
-      <Testimonials/>
+      <Testimonials />
+      <Articles />
       {/* <Placement /> */}
       {/* <Accreditions /> */}
-      <AdminProcessTimeline />
+      {/* <AdminProcessTimeline /> */}
       {/* <Testimonials /> */}
       <div ref={contactRef}>
         <ContactForm />
