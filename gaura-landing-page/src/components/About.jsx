@@ -1,5 +1,6 @@
 "use client";
 
+import { PiSealCheckDuotone } from "react-icons/pi";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
@@ -10,7 +11,7 @@ const YELLOW = "#ffd72e";
 
 // Stats shown in the about section
 const stats = [
-  { number: "500+", label: "Students Trained" },
+  { number: "100+", label: "Students Trained" },
   { number: "8+", label: "Years of Excellence" },
   { number: "40+", label: "Expert Instructors" },
   { number: "96%", label: "Placement Rate" },
@@ -18,10 +19,10 @@ const stats = [
 
 // Key pillars / why us points
 const pillars = [
-  { icon: "◈", text: "Hands-on practical training from day one" },
-  { icon: "◈", text: "Modern techniques & global curriculum" },
-  { icon: "◈", text: "Real-world skills for confident artists" },
-  { icon: "◈", text: "Career-focused mentorship & placement support" },
+  { icon: <PiSealCheckDuotone />, text: "Hands-on practical training from day one" },
+  { icon: <PiSealCheckDuotone />, text: "Modern techniques & global curriculum" },
+  { icon: <PiSealCheckDuotone />, text: "Real-world skills for confident artists" },
+  { icon: <PiSealCheckDuotone />, text: "Career-focused mentorship & placement support" },
 ];
 
 // ── Simple scroll-reveal hook ─────────────────────────────────
@@ -82,7 +83,7 @@ export default function AboutAcademy({ onCourseClick }) {
       style={{ background: BLACK }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 
         .about-reveal {
           opacity: 0;
@@ -111,7 +112,7 @@ export default function AboutAcademy({ onCourseClick }) {
           opacity: 1;
           transform: translateX(0);
         }
-        .pillar-row:hover .pillar-icon { color: ${YELLOW}; transform: rotate(45deg) scale(1.2); }
+        .pillar-row:hover .pillar-icon { color: ${YELLOW}; transform: scale(1.2); }
         .pillar-row:hover .pillar-text { color: #ffffff; }
         .pillar-icon { transition: color 0.3s, transform 0.35s; }
         .pillar-text { transition: color 0.3s; }
@@ -141,11 +142,11 @@ export default function AboutAcademy({ onCourseClick }) {
         >
           {/* Main image */}
           <Image
-            src="/assets/images/gaura/gaura-about.png"
-            alt="Gaura Makeup Academy"
+            src="/assets/images/interior.webp"
+            alt="Reception of Gaura Makeup Academy"
             fill
-            className="object-cover object-[center_20%]"
-            style={{ transform: "scale(0.9)" }}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover object-[50%_40%]"
             priority
           />
 
@@ -173,12 +174,12 @@ export default function AboutAcademy({ onCourseClick }) {
             }}
           >
             <p style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "2.8rem", fontWeight: 300,
               lineHeight: 1, color: BLACK,
             }}>8+</p>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "0.65rem", fontWeight: 700,
               letterSpacing: "0.18em", textTransform: "uppercase",
               color: BLACK, marginTop: "4px",
@@ -212,7 +213,7 @@ export default function AboutAcademy({ onCourseClick }) {
             <div style={{ width: "32px", height: "1px", background: GOLD }} />
             <p
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.66rem",
                 fontWeight: 700,
                 letterSpacing: "0.28em",
@@ -227,7 +228,7 @@ export default function AboutAcademy({ onCourseClick }) {
           {/* Main heading */}
           <h2
             style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
               fontWeight: 300,
               lineHeight: 1.1,
@@ -255,7 +256,7 @@ export default function AboutAcademy({ onCourseClick }) {
           {/* Body text */}
           <p
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(0.82rem, 1.2vw, 0.92rem)",
               color: `${GOLD}bb`,
               lineHeight: 1.85,
@@ -270,7 +271,7 @@ export default function AboutAcademy({ onCourseClick }) {
 
           <p
             style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(1.1rem, 2vw, 1.45rem)",
               fontWeight: 400,
               fontStyle: "italic",
@@ -281,7 +282,8 @@ export default function AboutAcademy({ onCourseClick }) {
               paddingLeft: "16px",
             }}
           >
-            "Not just teaching makeup — but building successful careers."
+            &quot;Not just teaching makeup — but building successful
+            careers.&quot;
           </p>
 
           {/* Pillars */}
@@ -306,15 +308,19 @@ export default function AboutAcademy({ onCourseClick }) {
                 }}
               >
                 <span
-                  className="pillar-icon"
-                  style={{ color: GOLD, fontSize: "0.9rem", flexShrink: 0 }}
+                  className="pillar-icon icon-glow"
+                  style={{
+                    fontSize: "1.25rem",
+                    flexShrink: 0,
+                    display: "inline-flex",
+                  }}
                 >
                   {p.icon}
                 </span>
                 <span
                   className="pillar-text"
                   style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: "'DM Sans', sans-serif",
                     fontSize: "0.8rem",
                     fontWeight: 600,
                     color: `${GOLD}cc`,
@@ -332,7 +338,7 @@ export default function AboutAcademy({ onCourseClick }) {
             <button
               onClick={onCourseClick}
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 background: YELLOW,
                 color: BLACK,
                 fontWeight: 700,
@@ -352,7 +358,7 @@ export default function AboutAcademy({ onCourseClick }) {
             </button>
             <button
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 background: "transparent",
                 color: GOLD,
                 fontWeight: 700,
@@ -406,7 +412,7 @@ export default function AboutAcademy({ onCourseClick }) {
             <p
               className="stat-num"
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(2.2rem, 5vw, 3.4rem)",
                 fontWeight: 300,
                 color: GOLD,
@@ -419,7 +425,7 @@ export default function AboutAcademy({ onCourseClick }) {
             </p>
             <p
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.68rem",
                 fontWeight: 600,
                 letterSpacing: "0.18em",

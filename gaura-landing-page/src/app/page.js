@@ -17,6 +17,7 @@ import BottomNavbar from "@/components/BottomNavbar";
 import { Toaster } from "react-hot-toast";
 import AboutAcademy from "@/components/About";
 import Articles from "@/components/Articles";
+import AcademyShowcase from "@/components/AcademyShowcase";
 
 export default function Home() {
   const contactRef = useRef(null);
@@ -43,6 +44,7 @@ export default function Home() {
       <Services />
 
       <CareerTransformation />
+      <AcademyShowcase />
       <StudentWorkGallery />
       <Testimonials />
       <Articles />

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { PiArrowLeftDuotone } from "react-icons/pi";
 import { useParams } from "next/navigation";
 import { applyPlaceholders, fetchAppConfig } from "@/utils/placeholders";
 import Footer from "@/components/Footer";
@@ -46,7 +47,7 @@ export default function PolicyPage() {
     <main className="min-h-screen px-6 py-16 sm:px-10" style={{ background: "#050300" }}>
       <div className="mx-auto w-full max-w-3xl">
         <Link href="/" className="text-sm font-semibold" style={{ color: GOLD }}>
-          ← Back to home
+          <PiArrowLeftDuotone style={{ display: "inline", verticalAlign: "-2px" }} /> Back to home
         </Link>
 
         {status === "loading" && (
@@ -60,7 +61,7 @@ export default function PolicyPage() {
           <article className="mt-8">
             <h1
               className="text-4xl text-white sm:text-5xl"
-              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               {applyPlaceholders(policy.title, config)}
             </h1>

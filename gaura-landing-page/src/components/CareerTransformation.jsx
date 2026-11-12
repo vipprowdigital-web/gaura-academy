@@ -3,18 +3,44 @@
 
 import { useState } from "react";
 import { academyFeatures } from "@/seeds/career-transformation";
+import {
+  PiMedalDuotone,
+  PiTrendUpDuotone,
+  PiChalkboardTeacherDuotone,
+  PiSparkleDuotone,
+  PiCrownSimpleDuotone,
+  PiChartLineUpDuotone,
+  PiBriefcaseDuotone,
+  PiPaintBrushDuotone,
+  PiGlobeHemisphereEastDuotone,
+  PiPaletteDuotone,
+  PiSealCheckDuotone,
+  PiGraduationCapDuotone,
+} from "react-icons/pi";
 
 // ── Gaura Academy Brand Colors ────────────────────────────────
 const BLACK = "#000000";
 const GOLD = "#dcad6a";
 const YELLOW = "#ffd72e";
 
-// Icon map — assign a relevant emoji/symbol per feature keyword
-// You can swap these with actual SVG icons or react-icons
-const featureIcons = [
-  "✦", "◈", "❋", "⟡", "✧", "◉", "⬡", "✵",
-  "◎", "⟢", "✴", "◇", "❂", "⬢", "✾", "◈",
+// Premium duotone icons (Phosphor), matched to each feature by keyword.
+const keywordIcons = [
+  [/excellence|unmatched/i, PiMedalDuotone],
+  [/elevat|skill/i, PiTrendUpDuotone],
+  [/mentor/i, PiChalkboardTeacherDuotone],
+  [/innovat/i, PiSparkleDuotone],
+  [/luxury|ambience/i, PiCrownSimpleDuotone],
+  [/growth/i, PiChartLineUpDuotone],
+  [/career|empower/i, PiBriefcaseDuotone],
+  [/technique|refined/i, PiPaintBrushDuotone],
+  [/global|standard/i, PiGlobeHemisphereEastDuotone],
+  [/artistic|art/i, PiPaletteDuotone],
 ];
+const fallbackIcons = [PiSealCheckDuotone, PiGraduationCapDuotone, PiSparkleDuotone];
+
+const getFeatureIcon = (label, i) =>
+  keywordIcons.find(([rx]) => rx.test(label))?.[1] ||
+  fallbackIcons[i % fallbackIcons.length];
 
 export default function CareerTransformation() {
   return (
@@ -24,7 +50,7 @@ export default function CareerTransformation() {
     >
       {/* Google Fonts */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
       `}</style>
 
       {/* ── Background decorative elements ───────────────────── */}
@@ -78,7 +104,7 @@ export default function CareerTransformation() {
           <div style={{ width: "32px", height: "1px", background: GOLD }} />
           <p
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "0.68rem",
               fontWeight: 600,
               letterSpacing: "0.28em",
@@ -94,7 +120,7 @@ export default function CareerTransformation() {
         {/* Main title */}
         <h2
           style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "clamp(2.4rem, 6vw, 4.2rem)",
             fontWeight: 300,
             lineHeight: 1.05,
@@ -120,7 +146,7 @@ export default function CareerTransformation() {
         {/* Description */}
         <p
           style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.85rem",
             color: `${GOLD}bb`,
             lineHeight: 1.8,
@@ -135,28 +161,31 @@ export default function CareerTransformation() {
 
       {/* ── Feature Cards Grid ────────────────────────────────── */}
       <div
-        className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 relative z-10"
+        className="w-full flex flex-wrap justify-center gap-4 sm:gap-5 relative z-10"
         style={{ marginTop: "56px", maxWidth: "1200px" }}
       >
         {academyFeatures.map((feature, i) => (
-          <FeatureCard key={i} label={feature} icon={featureIcons[i % featureIcons.length]} index={i} />
+          <FeatureCard key={i} label={feature} icon={getFeatureIcon(feature, i)} index={i} />
         ))}
       </div>
     </section>
   );
 }
 
-function FeatureCard({ label, icon, index }) {
+function FeatureCard({ label, icon: Icon, index }) {
   const [hovered, setHovered] = useState(false);
 
   // Alternate subtle tints for visual rhythm
   const isEven = index % 2 === 0;
 
+  // Card widths match a 2 / 3 / 4 column grid (gap 1rem, then 1.25rem); the
+  // parent is a centred flex-wrap, so an incomplete last row is centred.
+
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative flex flex-col items-center justify-center text-center gap-3 rounded-2xl overflow-hidden cursor-default"
+      className="relative flex flex-col items-center justify-center text-center gap-3 rounded-2xl overflow-hidden cursor-default w-[calc((100%-1rem)/2)] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-3.75rem)/4)]"
       style={{
         padding: "28px 16px 24px",
         background: hovered
@@ -186,27 +215,26 @@ function FeatureCard({ label, icon, index }) {
 
       {/* Icon circle */}
       <div
-        className="flex items-center justify-center rounded-full"
+        className="icon-badge"
         style={{
-          width: "44px",
-          height: "44px",
+          width: "54px",
+          height: "54px",
           background: hovered
-            ? `linear-gradient(135deg, ${YELLOW}33, ${GOLD}22)`
-            : `linear-gradient(135deg, ${GOLD}18, transparent)`,
-          border: `1px solid ${hovered ? YELLOW + "66" : GOLD + "33"}`,
+            ? `linear-gradient(135deg, ${YELLOW}44, ${GOLD}33)`
+            : `radial-gradient(circle at 30% 25%, ${YELLOW}22, ${GOLD}0d)`,
+          border: `1px solid ${hovered ? YELLOW + "bb" : YELLOW + "55"}`,
           fontSize: "1.2rem",
-          color: hovered ? YELLOW : GOLD,
           transition: "all 0.4s ease",
           flexShrink: 0,
         }}
       >
-        {icon}
+        <Icon size={28} />
       </div>
 
       {/* Label */}
       <p
         style={{
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: "'DM Sans', sans-serif",
           fontSize: "clamp(0.72rem, 1.5vw, 0.85rem)",
           fontWeight: 600,
           color: hovered ? "#ffffff" : GOLD,

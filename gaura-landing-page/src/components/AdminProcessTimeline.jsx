@@ -25,7 +25,7 @@ export default function AdminProcessTimeline() {
           <div style={{ width: "28px", height: "1px", background: GOLD }} />
           <p
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "0.68rem",
               fontWeight: 600,
               letterSpacing: "0.26em",
@@ -40,7 +40,7 @@ export default function AdminProcessTimeline() {
 
         <h2
           style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "clamp(2rem, 5vw, 3.4rem)",
             fontWeight: 300,
             color: "#dcad6a",
@@ -64,7 +64,7 @@ export default function AdminProcessTimeline() {
 
         <p
           style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.83rem",
             color: `${GOLD}bb`,
             lineHeight: 1.8,
@@ -99,7 +99,7 @@ export default function AdminProcessTimeline() {
                   style={{
                     background: YELLOW,
                     color: BLACK,
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: "'DM Sans', sans-serif",
                     boxShadow: `0 0 20px ${YELLOW}44`,
                   }}
                 >
@@ -112,7 +112,7 @@ export default function AdminProcessTimeline() {
                 <h4
                   className="font-bold text-lg leading-tight tracking-tight"
                   style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: "'DM Sans', sans-serif",
                     color: GOLD,
                   }}
                 >
@@ -121,7 +121,7 @@ export default function AdminProcessTimeline() {
                 <p
                   className="text-sm mt-1 max-w-50 tracking-tight"
                   style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: "'DM Sans', sans-serif",
                     color: `${GOLD}88`,
                   }}
                 >
@@ -134,7 +134,7 @@ export default function AdminProcessTimeline() {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Montserrat:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
       `}</style>
     </section>
   );

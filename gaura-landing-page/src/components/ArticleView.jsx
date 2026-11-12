@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { PiArrowLeftDuotone } from "react-icons/pi";
 import { applyPlaceholders, fetchAppConfig } from "@/utils/placeholders";
 import Footer from "@/components/Footer";
 
@@ -49,7 +50,7 @@ export default function ArticleView({ id }) {
             className="text-sm font-semibold"
             style={{ color: GOLD }}
           >
-            ← Back to home
+            <PiArrowLeftDuotone style={{ display: "inline", verticalAlign: "-2px" }} /> Back to home
           </Link>
 
           {status === "loading" && (
@@ -84,7 +85,7 @@ export default function ArticleView({ id }) {
               </p>
               <h1
                 className="mt-3 text-4xl text-white sm:text-5xl"
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 {applyPlaceholders(article.title, config)}
               </h1>

@@ -3,7 +3,12 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { IoStarSharp } from "react-icons/io5";
+import {
+  PiStarFill,
+  PiCaretLeftBold,
+  PiCaretRightBold,
+  PiCheckBold,
+} from "react-icons/pi";
 
 const GOLD = "#dcad6a";
 const YELLOW = "#ffd72e";
@@ -64,7 +69,7 @@ export default function Testimonials() {
         });
 
         const result = await response.json();
-        console.log("TESTIMONIAL API RESULT:", result);
+        // console.log("TESTIMONIAL API RESULT:", result);
 
         if (response.ok && Array.isArray(result.data)) {
           const formatted = result.data.map((item) => ({
@@ -130,7 +135,7 @@ export default function Testimonials() {
       onMouseLeave={() => setPaused(false)}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 
         @keyframes fadeSlideUp {
           from { opacity: 0; transform: translateY(24px); }
@@ -164,7 +169,7 @@ export default function Testimonials() {
         }
 
         .big-quote {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: 12rem;
           line-height: 0.6;
           color: ${YELLOW}14;
@@ -207,7 +212,7 @@ export default function Testimonials() {
             <div style={{ width: "28px", height: "1px", background: GOLD }} />
             <p
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.66rem",
                 fontWeight: 700,
                 letterSpacing: "0.28em",
@@ -222,7 +227,7 @@ export default function Testimonials() {
 
           <h2
             style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(2rem, 5.5vw, 3.8rem)",
               fontWeight: 300,
               color: "#ffffff",
@@ -253,7 +258,7 @@ export default function Testimonials() {
           }}
         >
           <span className="big-quote" aria-hidden>
-            "
+            &quot;
           </span>
 
           <div
@@ -293,13 +298,13 @@ export default function Testimonials() {
                   fontSize: "11px",
                 }}
               >
-                ✓
+                <PiCheckBold size={12} />
               </div>
             </div>
 
             <div className="flex items-center gap-1">
               {[...Array(Number(t.rating) || 5)].map((_, i) => (
-                <IoStarSharp
+                <PiStarFill
                   key={i}
                   style={{ color: YELLOW, fontSize: "15px" }}
                 />
@@ -308,7 +313,7 @@ export default function Testimonials() {
 
             <p
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(1.1rem, 2.5vw, 1.45rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
@@ -317,13 +322,13 @@ export default function Testimonials() {
                 maxWidth: "560px",
               }}
             >
-              "{t.review}"
+              &quot;{t.review}&quot;
             </p>
 
             <div>
               <p
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.88rem",
                   fontWeight: 700,
                   color: GOLD,
@@ -335,7 +340,7 @@ export default function Testimonials() {
 
               <p
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.7rem",
                   fontWeight: 500,
                   color: `${GOLD}66`,
@@ -397,7 +402,7 @@ export default function Testimonials() {
               fontSize: "24px",
             }}
           >
-            ‹
+            <PiCaretLeftBold size={18} />
           </button>
 
           {testimonials.map((_, i) => (
@@ -434,7 +439,7 @@ export default function Testimonials() {
               fontSize: "24px",
             }}
           >
-            ›
+            <PiCaretRightBold size={18} />
           </button>
         </div>
       </div>
@@ -552,7 +557,7 @@ export default function Testimonials() {
 //       onMouseLeave={() => setPaused(false)}
 //     >
 //       <style>{`
-//         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@400;500;600;700;800&display=swap');
+//         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 
 //         @keyframes fadeSlideUp {
 //           from { opacity: 0; transform: translateY(24px); }
@@ -573,7 +578,7 @@ export default function Testimonials() {
 
 //         /* Big decorative quote mark */
 //         .big-quote {
-//           font-family: 'Cormorant Garamond', serif;
+//           font-family: 'DM Sans', sans-serif;
 //           font-size: 12rem;
 //           line-height: 0.6;
 //           color: ${YELLOW}14;
@@ -607,14 +612,14 @@ export default function Testimonials() {
 //           <div className="flex items-center gap-3">
 //             <div style={{ width: "28px", height: "1px", background: GOLD }} />
 //             <p style={{
-//               fontFamily: "'Montserrat', sans-serif",
+//               fontFamily: "'DM Sans', sans-serif",
 //               fontSize: "0.66rem", fontWeight: 700,
 //               letterSpacing: "0.28em", color: GOLD, textTransform: "uppercase",
 //             }}>Student Stories</p>
 //             <div style={{ width: "28px", height: "1px", background: GOLD }} />
 //           </div>
 //           <h2 style={{
-//             fontFamily: "'Cormorant Garamond', Georgia, serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //             fontSize: "clamp(2rem, 5.5vw, 3.8rem)",
 //             fontWeight: 300, color: "#ffffff", lineHeight: 1.08,
 //           }}>
@@ -681,13 +686,13 @@ export default function Testimonials() {
 //             {/* Stars */}
 //             <div className="flex items-center gap-1">
 //               {[...Array(t.rating)].map((_, i) => (
-//                 <IoStarSharp key={i} style={{ color: YELLOW, fontSize: "15px" }} />
+//                 <PiStarFill key={i} style={{ color: YELLOW, fontSize: "15px" }} />
 //               ))}
 //             </div>
 
 //             {/* Review text */}
 //             <p style={{
-//               fontFamily: "'Cormorant Garamond', Georgia, serif",
+//               fontFamily: "'DM Sans', sans-serif",
 //               fontSize: "clamp(1.1rem, 2.5vw, 1.45rem)",
 //               fontWeight: 400, fontStyle: "italic",
 //               color: "#ffffff", lineHeight: 1.7,
@@ -699,14 +704,14 @@ export default function Testimonials() {
 //             {/* Name + role */}
 //             <div>
 //               <p style={{
-//                 fontFamily: "'Montserrat', sans-serif",
+//                 fontFamily: "'DM Sans', sans-serif",
 //                 fontSize: "0.88rem", fontWeight: 700,
 //                 color: GOLD, letterSpacing: "0.05em",
 //               }}>
 //                 {t.name}
 //               </p>
 //               <p style={{
-//                 fontFamily: "'Montserrat', sans-serif",
+//                 fontFamily: "'DM Sans', sans-serif",
 //                 fontSize: "0.7rem", fontWeight: 500,
 //                 color: `${GOLD}66`, letterSpacing: "0.12em",
 //                 textTransform: "uppercase", marginTop: "2px",
@@ -868,7 +873,7 @@ export default function Testimonials() {
 // //               <div>
 // //                 <div className="flex gap-1">
 // //                   {[...Array(testimonial.rating)].map((_, j) => (
-// //                     <IoStarSharp key={j} className="text-yellow-500" />
+// //                     <PiStarFill key={j} className="text-yellow-500" />
 // //                   ))}
 // //                 </div>
 // //                 <p className={`pt-2 text-sm ${textColor2}`}>

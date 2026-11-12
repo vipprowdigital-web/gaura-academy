@@ -266,7 +266,7 @@ export default function AppConfigurationForm({
           </CardHeader>
           <CardContent className="space-y-5">
             {values.companyAddress.map((addr, index) => {
-              console.log("isFrozen addr:", Object.isFrozen(addr));
+              // console.log("isFrozen addr:", Object.isFrozen(addr));
               return (
                 <motion.div
                   key={index}

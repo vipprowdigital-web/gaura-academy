@@ -2,15 +2,17 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
-  FaPhoneAlt,
-  FaFacebookF,
-  FaInstagram,
-  FaYoutube,
-  FaLinkedinIn,
-} from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
-import { FaLocationDot, FaXTwitter } from "react-icons/fa6";
-import { IoLogoWhatsapp } from "react-icons/io";
+  PiPhoneCallDuotone,
+  PiFacebookLogoDuotone,
+  PiInstagramLogoDuotone,
+  PiYoutubeLogoDuotone,
+  PiLinkedinLogoDuotone,
+  PiEnvelopeSimpleDuotone,
+  PiMapPinDuotone,
+  PiXLogoDuotone,
+  PiWhatsappLogoDuotone,
+  PiSparkleDuotone,
+} from "react-icons/pi";
 import { fetchAppConfig } from "@/utils/placeholders";
 
 // ── Gaura Academy Brand Colors ────────────────────────────────
@@ -81,29 +83,29 @@ export default function ContactForm() {
         name: "Address",
         value: a.address,
         link: a.googleMapLocation || "#",
-        icon: <FaLocationDot size={18} />,
+        icon: <PiMapPinDuotone size={22} />,
       })),
     {
       name: "Phone",
       value: phoneNumber,
       link: `tel:${phoneNumber}`,
-      icon: <FaPhoneAlt size={18} />,
+      icon: <PiPhoneCallDuotone size={22} />,
     },
     {
       name: "Email",
       value: email,
       link: `mailto:${email}`,
-      icon: <SiGmail size={18} />,
+      icon: <PiEnvelopeSimpleDuotone size={22} />,
     },
   ];
 
   const socials = [
-    { name: "Facebook", link: config?.facebookLink, icon: <FaFacebookF /> },
-    { name: "Instagram", link: config?.instagramLink, icon: <FaInstagram /> },
-    { name: "Twitter", link: config?.twitterLink, icon: <FaXTwitter /> },
-    { name: "YouTube", link: config?.youtubeLink, icon: <FaYoutube /> },
-    { name: "WhatsApp", link: config?.whatsAppLink, icon: <IoLogoWhatsapp /> },
-    { name: "LinkedIn", link: config?.linkedinLink, icon: <FaLinkedinIn /> },
+    { name: "Facebook", link: config?.facebookLink, icon: <PiFacebookLogoDuotone /> },
+    { name: "Instagram", link: config?.instagramLink, icon: <PiInstagramLogoDuotone /> },
+    { name: "Twitter", link: config?.twitterLink, icon: <PiXLogoDuotone /> },
+    { name: "YouTube", link: config?.youtubeLink, icon: <PiYoutubeLogoDuotone /> },
+    { name: "WhatsApp", link: config?.whatsAppLink, icon: <PiWhatsappLogoDuotone /> },
+    { name: "LinkedIn", link: config?.linkedinLink, icon: <PiLinkedinLogoDuotone /> },
   ].filter((s) => s.link);
 
   const handleChange = (e) => {
@@ -153,7 +155,7 @@ const handleSubmit = async (e) => {
     borderRadius: "10px",
     color: "#ffffff",
     outline: "none",
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "'DM Sans', sans-serif",
     transition: "border 0.25s ease, box-shadow 0.25s ease",
     boxShadow: focused === name ? `0 0 0 3px ${YELLOW}18` : "none",
   });
@@ -169,7 +171,7 @@ const handleSubmit = async (e) => {
     borderRadius: "3px",
     pointerEvents: "none",
     transition: "all 0.2s ease",
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "'DM Sans', sans-serif",
     fontWeight: 600,
     letterSpacing: "0.05em",
     textTransform: "uppercase",
@@ -181,7 +183,7 @@ const handleSubmit = async (e) => {
       style={{ background: BLACK }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Montserrat:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
         select option { background: #111000; color: #ffffff; }
         textarea { resize: vertical; }
         ::-webkit-scrollbar { width: 4px; }
@@ -195,7 +197,7 @@ const handleSubmit = async (e) => {
           <div style={{ width: "28px", height: "1px", background: GOLD }} />
           <p
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "0.68rem",
               fontWeight: 600,
               letterSpacing: "0.26em",
@@ -209,14 +211,14 @@ const handleSubmit = async (e) => {
         </div>
         <h2
           style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "clamp(2rem, 5vw, 3.4rem)",
             fontWeight: 300,
             color: "#ffffff",
             lineHeight: 1.08,
           }}
         >
-          <em style={{ color: GOLD, fontStyle: "italic" }}>Contact us</em>
+          Contact us
         </h2>
         <div
           style={{
@@ -229,7 +231,7 @@ const handleSubmit = async (e) => {
         />
         <p
           style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.83rem",
             color: `${GOLD}bb`,
             lineHeight: 1.8,
@@ -248,7 +250,7 @@ const handleSubmit = async (e) => {
           <div className="flex flex-col gap-1">
             <h3
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "1.9rem",
                 fontWeight: 300,
                 color: "#ffffff",
@@ -258,7 +260,7 @@ const handleSubmit = async (e) => {
             </h3>
             <p
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.82rem",
                 color: `${GOLD}99`,
                 lineHeight: 1.8,
@@ -279,19 +281,15 @@ const handleSubmit = async (e) => {
                 className="group flex items-start gap-4"
               >
                 <div
-                  className="shrink-0 rounded-full p-3 transition-transform duration-300 group-hover:scale-110"
-                  style={{
-                    background: `${YELLOW}18`,
-                    border: `1px solid ${GOLD}44`,
-                    color: GOLD,
-                  }}
+                  className="icon-badge shrink-0 transition-transform duration-300 group-hover:scale-110"
+                  style={{ width: "48px", height: "48px" }}
                 >
                   {detail.icon}
                 </div>
                 <div>
                   <h6
                     style={{
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: "'DM Sans', sans-serif",
                       fontSize: "0.62rem",
                       fontWeight: 700,
                       letterSpacing: "0.18em",
@@ -305,7 +303,7 @@ const handleSubmit = async (e) => {
                   <p
                     className="transition-colors duration-300 group-hover:text-white"
                     style={{
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: "'DM Sans', sans-serif",
                       fontSize: "0.85rem",
                       color: GOLD,
                       fontWeight: 500,
@@ -351,7 +349,7 @@ const handleSubmit = async (e) => {
           <div>
             <h3
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "1.6rem",
                 fontWeight: 300,
                 color: "#ffffff",
@@ -361,7 +359,7 @@ const handleSubmit = async (e) => {
             </h3>
             <p
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.78rem",
                 color: `${GOLD}99`,
                 marginTop: "4px",
@@ -380,7 +378,7 @@ const handleSubmit = async (e) => {
             {details.map((detail) => (
               <div key={detail.name}>
                 <h6 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.62rem", fontWeight: 700,
                   letterSpacing: "0.18em", color: YELLOW,
                   textTransform: "uppercase", marginBottom: "2px",
@@ -388,7 +386,7 @@ const handleSubmit = async (e) => {
                   {detail.name}
                 </h6>
                 <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.78rem", color: GOLD, fontWeight: 500,
                 }}>
                   {detail.value}
@@ -500,14 +498,14 @@ const handleSubmit = async (e) => {
               </div>
               <p
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.7rem",
                   color: `${GOLD}77`,
                   marginTop: "4px",
                   paddingLeft: "2px",
                 }}
               >
-                ✦ Which course are you interested in?
+                <PiSparkleDuotone style={{ display: "inline", verticalAlign: "-2px" }} /> Which course are you interested in?
               </p>
             </div>
 
@@ -532,7 +530,7 @@ const handleSubmit = async (e) => {
               type="submit"
               className="w-60 py-3 rounded-xl font-bold tracking-widest uppercase transition-all duration-300"
               style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 background: YELLOW,
                 color: BLACK,
                 letterSpacing: "0.15em",
@@ -543,7 +541,7 @@ const handleSubmit = async (e) => {
               onMouseEnter={(e) => (e.currentTarget.style.background = GOLD)}
               onMouseLeave={(e) => (e.currentTarget.style.background = YELLOW)}
             >
-              Send Message ✦
+              Send Message <PiSparkleDuotone style={{ display: "inline", verticalAlign: "-2px" }} />
             </button>
           </form>
         </div>

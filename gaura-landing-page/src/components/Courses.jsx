@@ -2,7 +2,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { IoStarSharp } from "react-icons/io5";
+import Image from "next/image";
+import { PiStarFill } from "react-icons/pi";
+import Carousel from "./ui/Carousel";
+
+const FALLBACK_IMAGE = "/assets/images/gaura/images.png";
 
 const BLACK = "#000000";
 const GOLD = "#dcad6a";
@@ -41,7 +45,7 @@ export default function Courses({ onContactClick }) {
         });
 
         const result = await response.json();
-        console.log("COURSE API RESULT:", result);
+        // console.log("COURSE API RESULT:", result);
 
         if (response.ok && Array.isArray(result.data)) {
           const formattedCourses = result.data.map((course) => {
@@ -109,7 +113,7 @@ export default function Courses({ onContactClick }) {
   return (
     <section className="w-full" style={{ background: BLACK }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Montserrat:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -129,7 +133,7 @@ export default function Courses({ onContactClick }) {
             fontWeight: 700,
             letterSpacing: "0.12em",
             fontSize: "0.72rem",
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
           }}
         >
           Offline Courses
@@ -145,7 +149,7 @@ export default function Courses({ onContactClick }) {
             letterSpacing: "0.12em",
             fontSize: "0.72rem",
             borderLeft: `1px solid ${GOLD}`,
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
           }}
         >
           Online Courses
@@ -165,7 +169,7 @@ export default function Courses({ onContactClick }) {
         <p
           className="uppercase flex items-center gap-2"
           style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.68rem",
             fontWeight: 600,
             letterSpacing: "0.25em",
@@ -193,10 +197,10 @@ export default function Courses({ onContactClick }) {
 
         <h2
           style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "clamp(2.2rem, 6vw, 4rem)",
             fontWeight: 300,
-            color: GOLD,
+            color: "#ffffff",
             letterSpacing: "-0.01em",
             lineHeight: 1.1,
           }}
@@ -206,7 +210,7 @@ export default function Courses({ onContactClick }) {
 
         <p
           className="text-sm max-w-[560px] leading-relaxed mt-1"
-          style={{ color: `${GOLD}aa`, fontFamily: "'Montserrat', sans-serif" }}
+          style={{ color: `${GOLD}aa`, fontFamily: "'DM Sans', sans-serif" }}
         >
           Our globally recognized curriculum and career-focused approach help
           students master beauty skills and confidently step into the
@@ -215,14 +219,14 @@ export default function Courses({ onContactClick }) {
       </div>
 
       {/* Cards */}
-      <div className="px-5 sm:px-7 lg:px-10 xl:px-16 py-10 w-full">
+      <div className="sm:px-7 lg:px-10 xl:px-16 py-10 w-full">
         {active === "offline" ? (
           loading ? (
             <div className="w-full p-20 flex justify-center items-center">
               <p
                 style={{
                   color: GOLD,
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.9rem",
                 }}
               >
@@ -230,7 +234,7 @@ export default function Courses({ onContactClick }) {
               </p>
             </div>
           ) : filteredCourses.length > 0 ? (
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <Carousel key={activeSubCategory}>
               {filteredCourses.map((course) => (
                 <CourseCard
                   key={course.id}
@@ -238,13 +242,13 @@ export default function Courses({ onContactClick }) {
                   onContactClick={onContactClick}
                 />
               ))}
-            </div>
+            </Carousel>
           ) : (
             <div className="w-full p-20 flex justify-center items-center">
               <p
                 style={{
                   color: `${GOLD}66`,
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.9rem",
                 }}
               >
@@ -258,7 +262,7 @@ export default function Courses({ onContactClick }) {
               className="text-2xl sm:text-4xl tracking-tighter font-bold text-center"
               style={{
                 color: GOLD,
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'DM Sans', sans-serif",
               }}
             >
               Coming Soon!
@@ -274,6 +278,7 @@ function CourseCard({ course, onContactClick }) {
   const [hovered, setHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [showFullDesc, setShowFullDesc] = useState(false);
+  const [imgSrc, setImgSrc] = useState(course.image || FALLBACK_IMAGE);
 
   const hasMore = course.summary.length > SUMMARY_LIMIT;
   const visibleItems = expanded
@@ -304,26 +309,23 @@ function CourseCard({ course, onContactClick }) {
         transition: "all 0.38s cubic-bezier(0.22,1,0.36,1)",
       }}
     >
-      {/* Image area - no crop, no side empty space */}
+      {/* Image area - same height on every card. The 4:5 frame matches the
+          portrait course posters, so the image covers it with almost no
+          cropping and is never stretched. */}
       <div
-        className="relative w-full overflow-hidden"
+        className="relative w-full overflow-hidden aspect-7/8"
         style={{
           background: "#050300",
           borderBottom: `1px solid ${GOLD}33`,
         }}
       >
-        <img
-          src={course.image}
+        <Image
+          src={imgSrc}
           alt={course.name}
-          className="block w-full"
-          style={{
-            height: "auto",
-            maxHeight: "520px",
-            objectFit: "contain",
-          }}
-          onError={(e) => {
-            e.currentTarget.src = "/assets/images/gaura/images.png";
-          }}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover object-top"
+          onError={() => setImgSrc(FALLBACK_IMAGE)}
         />
 
         <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
@@ -333,7 +335,7 @@ function CourseCard({ course, onContactClick }) {
               background: `${YELLOW}22`,
               color: YELLOW,
               border: `1px solid ${YELLOW}55`,
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               backdropFilter: "blur(4px)",
             }}
           >
@@ -347,12 +349,12 @@ function CourseCard({ course, onContactClick }) {
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-[2px]">
             {[...Array(4)].map((_, j) => (
-              <IoStarSharp
+              <PiStarFill
                 key={j}
                 style={{ color: YELLOW, fontSize: "12px" }}
               />
             ))}
-            <IoStarSharp style={{ color: GOLD + "66", fontSize: "12px" }} />
+            <PiStarFill style={{ color: GOLD + "66", fontSize: "12px" }} />
           </div>
 
           <span
@@ -360,7 +362,7 @@ function CourseCard({ course, onContactClick }) {
               color: GOLD,
               fontSize: "0.72rem",
               fontWeight: 600,
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
             }}
           >
             (4/5)
@@ -371,7 +373,7 @@ function CourseCard({ course, onContactClick }) {
         <h2
           className="font-bold tracking-tight leading-tight"
           style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)",
             color: hovered ? YELLOW : "#ffffff",
             transition: "color 0.3s",
@@ -387,7 +389,7 @@ function CourseCard({ course, onContactClick }) {
               className="text-sm leading-relaxed"
               style={{
                 color: GOLD + "bb",
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "'DM Sans', sans-serif",
                 fontSize: "0.78rem",
                 whiteSpace: "normal",
               }}
@@ -402,7 +404,7 @@ function CourseCard({ course, onContactClick }) {
                   setShowFullDesc(!showFullDesc);
                 }}
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.72rem",
                   fontWeight: 700,
                   color: YELLOW,
@@ -430,7 +432,7 @@ function CourseCard({ course, onContactClick }) {
                 key={i}
                 className="flex items-start gap-2"
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   fontSize: "0.75rem",
                   fontWeight: 500,
                   color: GOLD,
@@ -461,7 +463,7 @@ function CourseCard({ course, onContactClick }) {
             }}
             className="flex items-center gap-1 w-fit transition-all duration-200"
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "0.72rem",
               fontWeight: 700,
               color: expanded ? GOLD : YELLOW,
@@ -484,7 +486,7 @@ function CourseCard({ course, onContactClick }) {
           onClick={onContactClick}
           className="mt-2 w-full py-3 rounded-xl font-bold uppercase transition-all duration-300"
           style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
             background: YELLOW,
             color: BLACK,
             letterSpacing: "0.14em",
@@ -519,7 +521,7 @@ const CourseCategories = ({ category, fn, categories }) => {
             onClick={() => fn(cat)}
             className="px-4 py-1.5 rounded-full font-semibold text-xs whitespace-nowrap transition-all duration-300"
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               background: isActive ? YELLOW : "transparent",
               color: isActive ? BLACK : GOLD,
               border: `1px solid ${isActive ? YELLOW : GOLD + "55"}`,
@@ -540,7 +542,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 // import { useState } from "react";
 // import Image from "next/image";
 // import { courses } from "@/seeds/courses";
-// import { IoStarSharp } from "react-icons/io5";
+// import { PiStarFill } from "react-icons/pi";
 
 // // ── Gaura Academy Brand Colors ────────────────────────────────
 // const BLACK  = "#000000";
@@ -565,7 +567,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //   return (
 //     <section className="w-full" style={{ background: BLACK }}>
 //       <style>{`
-//         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Montserrat:wght@400;500;600;700;800&display=swap');
+//         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 //         .no-scrollbar::-webkit-scrollbar { display: none; }
 //         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 //       `}</style>
@@ -582,7 +584,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //             background: active === "offline" ? YELLOW : "transparent",
 //             color: active === "offline" ? BLACK : GOLD,
 //             fontWeight: 700, letterSpacing: "0.12em", fontSize: "0.72rem",
-//             fontFamily: "'Montserrat', sans-serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //           }}
 //         >
 //           Offline Courses
@@ -595,7 +597,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //             color: active === "online" ? BLACK : GOLD,
 //             fontWeight: 700, letterSpacing: "0.12em", fontSize: "0.72rem",
 //             borderLeft: `1px solid ${GOLD}`,
-//             fontFamily: "'Montserrat', sans-serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //           }}
 //         >
 //           Online Courses
@@ -612,7 +614,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //         <p
 //           className="uppercase flex items-center gap-2"
 //           style={{
-//             fontFamily: "'Montserrat', sans-serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //             fontSize: "0.68rem", fontWeight: 600,
 //             letterSpacing: "0.25em", color: GOLD,
 //           }}
@@ -624,7 +626,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 
 //         <h2
 //           style={{
-//             fontFamily: "'Cormorant Garamond', Georgia, serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //             fontSize: "clamp(2.2rem, 6vw, 4rem)",
 //             fontWeight: 300, color: GOLD,
 //             letterSpacing: "-0.01em", lineHeight: 1.1,
@@ -635,7 +637,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 
 //         <p
 //           className="text-sm max-w-[560px] leading-relaxed mt-1"
-//           style={{ color: `${GOLD}aa`, fontFamily: "'Montserrat', sans-serif" }}
+//           style={{ color: `${GOLD}aa`, fontFamily: "'DM Sans', sans-serif" }}
 //         >
 //           Our globally recognized curriculum and career-focused approach help
 //           students master beauty skills and confidently step into the
@@ -658,7 +660,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //             </div>
 //           ) : (
 //             <div className="w-full p-20 flex justify-center items-center">
-//               <p style={{ color: `${GOLD}66`, fontFamily: "'Montserrat', sans-serif", fontSize: "0.9rem" }}>
+//               <p style={{ color: `${GOLD}66`, fontFamily: "'DM Sans', sans-serif", fontSize: "0.9rem" }}>
 //                 No courses in this category yet.
 //               </p>
 //             </div>
@@ -667,7 +669,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //           <div className="w-full p-10 sm:p-20 flex justify-center items-center">
 //             <h2
 //               className="text-2xl sm:text-4xl tracking-tighter font-bold text-center"
-//               style={{ color: GOLD, fontFamily: "'Cormorant Garamond', serif" }}
+//               style={{ color: GOLD, fontFamily: "'DM Sans', sans-serif" }}
 //             >
 //               Coming Soon!
 //             </h2>
@@ -757,7 +759,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //               background: `${YELLOW}22`,
 //               color: YELLOW,
 //               border: `1px solid ${YELLOW}55`,
-//               fontFamily: "'Montserrat', sans-serif",
+//               fontFamily: "'DM Sans', sans-serif",
 //               backdropFilter: "blur(4px)",
 //             }}
 //           >
@@ -773,11 +775,11 @@ const CourseCategories = ({ category, fn, categories }) => {
 //         <div className="flex items-center gap-2">
 //           <div className="flex items-center gap-[2px]">
 //             {[...Array(4)].map((_, j) => (
-//               <IoStarSharp key={j} style={{ color: YELLOW, fontSize: "12px" }} />
+//               <PiStarFill key={j} style={{ color: YELLOW, fontSize: "12px" }} />
 //             ))}
-//             <IoStarSharp style={{ color: GOLD + "66", fontSize: "12px" }} />
+//             <PiStarFill style={{ color: GOLD + "66", fontSize: "12px" }} />
 //           </div>
-//           <span style={{ color: GOLD, fontSize: "0.72rem", fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>
+//           <span style={{ color: GOLD, fontSize: "0.72rem", fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>
 //             (4/5)
 //           </span>
 //         </div>
@@ -786,7 +788,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //         <h2
 //           className="font-bold tracking-tight leading-tight"
 //           style={{
-//             fontFamily: "'Montserrat', sans-serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //             fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)",
 //             color: hovered ? YELLOW : "#ffffff",
 //             transition: "color 0.3s",
@@ -800,7 +802,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //           className="text-sm leading-relaxed"
 //           style={{
 //             color: GOLD + "bb",
-//             fontFamily: "'Montserrat', sans-serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //             fontSize: "0.78rem",
 //           }}
 //         >
@@ -817,7 +819,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //               key={i}
 //               className="flex items-start gap-2"
 //               style={{
-//                 fontFamily: "'Montserrat', sans-serif",
+//                 fontFamily: "'DM Sans', sans-serif",
 //                 fontSize: "0.75rem",
 //                 fontWeight: 500,
 //                 color: GOLD,
@@ -836,7 +838,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //             onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
 //             className="flex items-center gap-1 w-fit transition-all duration-200"
 //             style={{
-//               fontFamily: "'Montserrat', sans-serif",
+//               fontFamily: "'DM Sans', sans-serif",
 //               fontSize: "0.72rem",
 //               fontWeight: 700,
 //               color: expanded ? GOLD : YELLOW,
@@ -875,7 +877,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //           onClick={onContactClick}
 //           className="mt-2 w-full py-3 rounded-xl font-bold uppercase transition-all duration-300"
 //           style={{
-//             fontFamily: "'Montserrat', sans-serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //             background: YELLOW,
 //             color: BLACK,
 //             letterSpacing: "0.14em",
@@ -911,7 +913,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //             onClick={() => fn(cat)}
 //             className="px-4 py-1.5 rounded-full font-semibold text-xs whitespace-nowrap transition-all duration-300"
 //             style={{
-//               fontFamily: "'Montserrat', sans-serif",
+//               fontFamily: "'DM Sans', sans-serif",
 //               background: isActive ? YELLOW : "transparent",
 //               color: isActive ? BLACK : GOLD,
 //               border: `1px solid ${isActive ? YELLOW : GOLD + "55"}`,
@@ -934,7 +936,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 // import { useState } from "react";
 // import Heading from "./ui/Heading";
 // import { courses } from "@/seeds/courses";
-// import { IoStarSharp } from "react-icons/io5";
+// import { PiStarFill } from "react-icons/pi";
 
 // // ── Gaura Academy Brand Colors ────────────────────────────────
 // const BLACK = "#000000";
@@ -1010,7 +1012,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //         <h2
 //           className="font-bold leading-tight"
 //           style={{
-//             fontFamily: "'Cormorant Garamond', Georgia, serif",
+//             fontFamily: "'DM Sans', sans-serif",
 //             fontSize: "clamp(2.2rem, 6vw, 4rem)",
 //             color: GOLD,
 //             letterSpacing: "-0.01em",
@@ -1022,7 +1024,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //         {/* Description */}
 //         <p
 //           className="text-sm max-w-[560px] leading-relaxed mt-1"
-//           style={{ color: `${GOLD}aa`, fontFamily: "'Montserrat', sans-serif" }}
+//           style={{ color: `${GOLD}aa`, fontFamily: "'DM Sans', sans-serif" }}
 //         >
 //           Our globally recognized curriculum and career-focused approach help students master beauty skills and confidently step into the professional industry.
 //         </p>
@@ -1113,9 +1115,9 @@ const CourseCategories = ({ category, fn, categories }) => {
 //         <div className="flex items-center gap-2">
 //           <div className="flex items-center gap-[2px]">
 //             {[...Array(4)].map((_, j) => (
-//               <IoStarSharp key={j} style={{ color: YELLOW, fontSize: "13px" }} />
+//               <PiStarFill key={j} style={{ color: YELLOW, fontSize: "13px" }} />
 //             ))}
-//             <IoStarSharp style={{ color: GOLD + "66", fontSize: "13px" }} />
+//             <PiStarFill style={{ color: GOLD + "66", fontSize: "13px" }} />
 //           </div>
 //           <span
 //             className="text-xs font-semibold"
@@ -1231,7 +1233,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //   textColor4,
 // } from "@/utils/colors.utils";
 // import { courses } from "@/seeds/courses";
-// import { IoStarSharp } from "react-icons/io5";
+// import { PiStarFill } from "react-icons/pi";
 
 // export default function Courses({ onContactClick }) {
 //   const [active, setActive] = useState("offline");
@@ -1292,7 +1294,7 @@ const CourseCategories = ({ category, fn, categories }) => {
 //                     >
 //                       <div className="flex items-center gap-1">
 //                         {[...Array(4)].map((_, j) => (
-//                           <IoStarSharp key={j} className="text-yellow-500" />
+//                           <PiStarFill key={j} className="text-yellow-500" />
 //                         ))}
 //                       </div>
 //                       <span className={`${textColor2}`}>(4/5)</span>

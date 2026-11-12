@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Heading from "./ui/Heading";
-import { color2 } from "@/utils/colors.utils";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000";
 
@@ -21,7 +19,7 @@ export default function StudentWorkGallery() {
         });
 
         const result = await response.json();
-        console.log("GALLERY API RESULT:", result);
+        // console.log("GALLERY API RESULT:", result);
 
         if (response.ok && Array.isArray(result.data)) {
           const activePhotos = result.data
@@ -54,13 +52,56 @@ export default function StudentWorkGallery() {
 
   return (
     <section className="w-full my-10 p-5 sm:p-10 flex flex-col items-center justify-center">
-      <Heading
-        title="Experience the Story"
-        subtitle="From Beginner to Professional"
-        titleColor={color2}
-        subtitleColor={color2}
-        description="Our students start with zero experience and become skilled makeup artists through hands-on training."
-      />
+      {/* Heading — same style as the other sections */}
+      <div className="flex flex-col items-center gap-3 text-center max-w-160">
+        <div className="flex items-center gap-3">
+          <div style={{ width: "28px", height: "1px", background: "#dcad6a" }} />
+          <p
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.66rem",
+              fontWeight: 700,
+              letterSpacing: "0.28em",
+              color: "#dcad6a",
+              textTransform: "uppercase",
+            }}
+          >
+            Experience the Story
+          </p>
+          <div style={{ width: "28px", height: "1px", background: "#dcad6a" }} />
+        </div>
+        <h2
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "clamp(2rem, 5.5vw, 3.8rem)",
+            fontWeight: 300,
+            color: "#ffffff",
+            lineHeight: 1.08,
+          }}
+        >
+          From Beginner to{" "}
+          <em style={{ color: "#dcad6a", fontStyle: "italic" }}>Professional</em>
+        </h2>
+        <div
+          style={{
+            width: "52px",
+            height: "2px",
+            background: "linear-gradient(to right, #ffd72e, #dcad6a)",
+            borderRadius: "2px",
+          }}
+        />
+        <p
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "0.9rem",
+            color: "#dcad6abb",
+            lineHeight: 1.8,
+          }}
+        >
+          Our students start with zero experience and become skilled makeup
+          artists through hands-on training.
+        </p>
+      </div>
 
       <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-5 py-10">
         {photos.map((photo, index) => (

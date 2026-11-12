@@ -8,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-plus-jakarta-sans);
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   /* --font-mono: var(--font-geist-mono); */
 }
 
@@ -24,7 +24,7 @@ body {
   color: var(--foreground);
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-family: "Negaroa", sans-serif; */
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* @font-face {
@@ -61,6 +61,25 @@ body {
 
 .animate-conveyor:hover {
   animation-play-state: paused;
+}
+
+/* Highlighted icons: bright accent + soft glow */
+.icon-glow {
+  color: #ffd72e;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 46, 0.5));
+}
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: #ffd72e;
+  background: radial-gradient(circle at 30% 25%, rgba(255, 215, 46, 0.22), rgba(220, 173, 106, 0.06));
+  border: 1px solid rgba(255, 215, 46, 0.45);
+  box-shadow: 0 0 18px rgba(255, 215, 46, 0.22), inset 0 1px 0 rgba(255, 215, 46, 0.3);
+}
+.icon-badge svg {
+  filter: drop-shadow(0 0 5px rgba(255, 215, 46, 0.55));
 }
 
 /* Rich text (articles / policies) authored in the console editor */

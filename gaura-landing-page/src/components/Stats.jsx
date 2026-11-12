@@ -2,7 +2,7 @@ import { textColor2 } from "@/utils/colors.utils";
 
 export default function Stats() {
   const stats = [
-    { id: 1, value: "500+", label: "Students Enrolled" },
+    { id: 1, value: "100+", label: "Students Enrolled" },
     { id: 2, value: "30+", label: "Courses Available" },
     { id: 3, value: "40+", label: "Expert Instructors" },
     { id: 4, value: "96%", label: "Student Satisfaction" },

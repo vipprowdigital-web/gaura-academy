@@ -19,7 +19,7 @@ export default function Services() {
           <div style={{ width: "28px", height: "1px", background: GOLD }} />
           <p
             style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "'DM Sans', sans-serif",
               fontSize: "0.68rem",
               fontWeight: 600,
               letterSpacing: "0.26em",
@@ -34,7 +34,7 @@ export default function Services() {
 
         <h2
           style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "clamp(2.2rem, 5.5vw, 3.8rem)",
             fontWeight: 300,
             color: "#ffffff",
@@ -58,7 +58,7 @@ export default function Services() {
 
         <p
           style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: "'DM Sans', sans-serif",
             fontSize: "0.83rem",
             color: `${GOLD}bb`,
             lineHeight: 1.8,
@@ -80,7 +80,7 @@ export default function Services() {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Montserrat:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
       `}</style>
     </section>
   );
@@ -115,8 +115,8 @@ function ServiceCard({ service }) {
 
       {/* Icon */}
       <div
-        className="rounded-lg mb-2 flex items-center justify-center"
-        style={{ color: YELLOW }}
+        className="icon-badge mb-2"
+        style={{ width: "60px", height: "60px" }}
       >
         {service.icon}
       </div>
@@ -125,7 +125,7 @@ function ServiceCard({ service }) {
       <h3
         className="font-extrabold text-lg sm:text-2xl"
         style={{
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: "'DM Sans', sans-serif",
           color: GOLD,
         }}
       >
@@ -146,7 +146,7 @@ function ServiceCard({ service }) {
       <p
         className="tracking-tight leading-relaxed text-sm"
         style={{
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: "'DM Sans', sans-serif",
           color: `${GOLD}99`,
         }}
       >

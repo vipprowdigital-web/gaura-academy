@@ -9,24 +9,41 @@ const GOLD = "#dcad6a";
 const YELLOW = "#ffd72e";
 
 // ── Slides — replace src with your actual images ──────────────
+// Layout of the photo area:
+//  - Mobile: the photo fills a box across the top ~42% of the screen and fades
+//    into black; the text sits below it. The photo is only scaled to the screen
+//    WIDTH, so it stays sharp (a full-height phone crop would upscale it).
+//  - Desktop: FULL_WRAP covers the whole hero; SIDE_WRAP covers the right 70%
+//    and fades into the dark text side.
+const FULL_WRAP = "absolute inset-x-0 top-0 h-[42svh] lg:inset-0 lg:h-full";
+const SIDE_WRAP = "absolute inset-x-0 top-0 h-[42svh] lg:inset-y-0 lg:left-[30%] lg:right-0 lg:h-full hero-fade";
 const slides = [
   {
-    src: "/assets/images/gaura/makeup_image_1080x1350.png",
+    src: "/assets/images/web/hero-image.webp",
+    wrapClass: FULL_WRAP,
+    // Black backdrop with the logo at the top: keep the top of the photo in
+    // view so the logo is never trimmed. In the mobile box the crop only
+    // trims a little off the outer brides' sides (all four faces stay visible).
+    imgClass: "object-cover object-[50%_0%]",
     heading1: "GAURA MAKEUP ACADEMY",
     heading2: "IS ALL ABOUT YOU",
     sub: "Enhancing your natural beauty with Gaura Academy. Discover the perfect blend of elegance and individuality with our expertise.",
   },
   {
-    src: "/assets/images/gaura/ChatGPT Image May 6, 2026, 04_52_24 PM.png",
+    src: "/assets/images/web/academy-hero.webp",
+    wrapClass: FULL_WRAP,
+    imgClass: "object-cover object-[50%_60%]",
     heading1: "GAURA MAKEUP ACADEMY",
-    heading2: "PICTURE-PERFECT RADIANCE",
-    sub: "Gaura Academy's signature makeup artistry — leaving you with a flawless and radiant look that lasts.",
+    heading2: "LEARN FROM THE BEST",
+    sub: "Live masterclasses and hands-on training led by certified makeup artists, so you learn by doing.",
   },
   {
-    src: "/assets/images/gaura/third.png",
+    src: "/assets/images/web/studio-exterior.webp",
+    wrapClass: SIDE_WRAP,
+    imgClass: "object-cover object-[50%_45%] lg:object-[50%_50%]",
     heading1: "GAURA MAKEUP ACADEMY",
-    heading2: "YOUR STORY, YOUR GLOW",
-    sub: "From bridal to editorial — our certified artists craft looks that celebrate who you truly are.",
+    heading2: "STEP INTO OUR ACADEMY",
+    sub: "Visit Gaura Makeup Academy, where beginners grow into confident, professional artists.",
   },
 ];
 
@@ -92,9 +109,9 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
       onMouseLeave={() => setPaused(false)}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
         .hero-h1 {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: 'DM Sans', sans-serif;
           font-weight: 300;
           line-height: 1.1;
           letter-spacing: -0.01em;
@@ -105,7 +122,7 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
           .hero-h1 { font-size: clamp(2rem, 4vw, 3.5rem); }
         }
         .hero-h2 {
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-weight: 800;
           letter-spacing: 0.06em;
           color: ${GOLD};
@@ -115,8 +132,14 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
         @media (min-width: 1024px) {
           .hero-h2 { font-size: clamp(1rem, 2.2vw, 1.9rem); }
         }
+        @media (min-width: 1024px) {
+          .hero-fade {
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 28%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 28%);
+          }
+        }
         .hero-sub {
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           font-size: clamp(0.72rem, 2.5vw, 0.9rem);
           color: rgba(255,255,255,0.65);
           line-height: 1.7;
@@ -138,25 +161,28 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
           initial="enter"
           animate="center"
           exit="exit"
-          className="absolute inset-0 w-full h-full"
+          className={slide.wrapClass}
         >
           <Image
             src={slide.src}
             alt={slide.heading2}
             fill
-            className="object-contain object-right"
+            sizes="100vw"
+            quality={95}
+            className={slide.imgClass}
             priority={current === 0}
           />
         </motion.div>
       </AnimatePresence>
 
       {/* ── GRADIENTS ────────────────────────────────────── */}
-      {/* Mobile: strong bottom-to-top dark scrim for text */}
+      {/* Mobile: solid black under the photo box, fading into the photo's lower
+          edge. The upper part of the photo is left untouched so it stays bright. */}
       <div
         className="absolute inset-0 lg:hidden"
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.15) 100%)",
+            "linear-gradient(to top, #000 0%, #000 50%, rgba(0,0,0,0) 66%)",
         }}
       />
       {/* Desktop: left-side scrim */}
@@ -238,7 +264,7 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
               <button
                 onClick={onContactClick}
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   background: YELLOW,
                   color: BLACK,
                   fontWeight: 700,
@@ -261,7 +287,7 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
               <button
                 onClick={onCourseClick}
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                   background: "transparent",
                   color: GOLD,
                   fontWeight: 700,

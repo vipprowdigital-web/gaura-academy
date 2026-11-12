@@ -1,8 +1,10 @@
 
 "use client";
-import { FaBookOpenReader } from "react-icons/fa6";
-import { FaWhatsapp } from "react-icons/fa";
-import { CiMail } from "react-icons/ci";
+import {
+  PiBookOpenTextDuotone,
+  PiWhatsappLogoDuotone,
+  PiEnvelopeSimpleDuotone,
+} from "react-icons/pi";
 
 // ── Gaura Academy Brand Colors ────────────────────────────────
 const BLACK  = "#000000";
@@ -11,10 +13,20 @@ const YELLOW = "#ffd72e";
 
 export default function BottomNavbar({ onContactClick, onCourseClick }) {
   const handleWhatsAppClick = () => {
-    const phoneNumber = process.env.WHATSAPP_NUMBER;
+    // Only NEXT_PUBLIC_* variables are available in the browser.
+    // wa.me needs digits only, with country code (e.g. 917078332794).
+    const phoneNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "").replace(/\D/g, "");
+    if (!phoneNumber) {
+      console.error("NEXT_PUBLIC_WHATSAPP_NUMBER is not set");
+      return;
+    }
     const message = "Hello! I would like to know more about Gaura Academy Courses.";
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
@@ -31,11 +43,11 @@ export default function BottomNavbar({ onContactClick, onCourseClick }) {
         className="flex flex-col items-center gap-[3px] cursor-pointer active:scale-95 transition-transform"
         onClick={onCourseClick}
       >
-        <FaBookOpenReader size={20} style={{ color: GOLD }} />
+        <PiBookOpenTextDuotone size={22} style={{ color: YELLOW, filter: "drop-shadow(0 0 5px rgba(255,215,46,0.5))" }} />
         <p style={{
           fontSize: "9px", fontWeight: 700,
           letterSpacing: "0.12em", textTransform: "uppercase",
-          color: GOLD, fontFamily: "'Montserrat', sans-serif",
+          color: GOLD, fontFamily: "'DM Sans', sans-serif",
         }}>
           Courses
         </p>
@@ -54,7 +66,7 @@ export default function BottomNavbar({ onContactClick, onCourseClick }) {
             boxShadow: `0 4px 20px ${YELLOW}66, 0 0 0 3px #0a0700, 0 0 0 4px ${GOLD}55`,
           }}
         >
-          <CiMail size={26} style={{ color: BLACK }} />
+          <PiEnvelopeSimpleDuotone size={28} style={{ color: BLACK }} />
         </div>
       </div>
 
@@ -63,11 +75,11 @@ export default function BottomNavbar({ onContactClick, onCourseClick }) {
         className="flex flex-col items-center gap-[3px] cursor-pointer active:scale-95 transition-transform"
         onClick={handleWhatsAppClick}
       >
-        <FaWhatsapp size={20} style={{ color: GOLD }} />
+        <PiWhatsappLogoDuotone size={22} style={{ color: YELLOW, filter: "drop-shadow(0 0 5px rgba(255,215,46,0.5))" }} />
         <p style={{
           fontSize: "9px", fontWeight: 700,
           letterSpacing: "0.12em", textTransform: "uppercase",
-          color: GOLD, fontFamily: "'Montserrat', sans-serif",
+          color: GOLD, fontFamily: "'DM Sans', sans-serif",
         }}>
           Whatsapp
         </p>

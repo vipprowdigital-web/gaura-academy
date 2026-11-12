@@ -34,7 +34,7 @@ export default function ProfilePage() {
   };
 
   const handleSave = () => {
-    console.log("Updated User:", user);
+    // console.log("Updated User:", user);
     // 👉 TODO: send PATCH request to backend
   };
 

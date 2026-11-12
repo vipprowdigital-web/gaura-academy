@@ -3,10 +3,18 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaPhoneAlt, FaFacebookF, FaInstagram, FaYoutube,   FaGoogle, FaLinkedinIn } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
-import { FaLocationDot, FaXTwitter } from "react-icons/fa6";
-import { IoLogoWhatsapp } from "react-icons/io";
+import {
+  PiPhoneCallDuotone,
+  PiFacebookLogoDuotone,
+  PiInstagramLogoDuotone,
+  PiYoutubeLogoDuotone,
+  PiGoogleLogoDuotone,
+  PiLinkedinLogoDuotone,
+  PiEnvelopeSimpleDuotone,
+  PiMapPinDuotone,
+  PiXLogoDuotone,
+  PiWhatsappLogoDuotone,
+} from "react-icons/pi";
 
 const BLACK = "#000000";
 const GOLD = "#dcad6a";
@@ -49,7 +57,7 @@ export default function Footer() {
         });
 
         const result = await response.json();
-        console.log("APP CONFIG RESULT:", result);
+        // console.log("APP CONFIG RESULT:", result);
 
         if (response.ok && result.data) {
           setConfig(result.data);
@@ -87,19 +95,19 @@ export default function Footer() {
       name: "Address",
       value: addresses[0]?.address || "",
       link: addresses[0]?.googleMapLocation || "#",
-      icon: <FaLocationDot size={20} style={{ color: GOLD }} />,
+      icon: <PiMapPinDuotone size={22} style={{ color: YELLOW, filter: "drop-shadow(0 0 5px rgba(255,215,46,0.5))" }} />,
     },
     {
       name: "Phone",
       value: phoneNumber,
       link: `tel:${phoneNumber}`,
-      icon: <FaPhoneAlt size={20} style={{ color: GOLD }} />,
+      icon: <PiPhoneCallDuotone size={22} style={{ color: YELLOW, filter: "drop-shadow(0 0 5px rgba(255,215,46,0.5))" }} />,
     },
     {
       name: "Email",
       value: email,
       link: `mailto:${email}`,
-      icon: <SiGmail size={20} style={{ color: GOLD }} />,
+      icon: <PiEnvelopeSimpleDuotone size={22} style={{ color: YELLOW, filter: "drop-shadow(0 0 5px rgba(255,215,46,0.5))" }} />,
     },
   ];
 
@@ -107,37 +115,37 @@ export default function Footer() {
     {
       name: "Facebook",
       link: config?.facebookLink,
-      icon: <FaFacebookF />,
+      icon: <PiFacebookLogoDuotone />,
     },
     {
       name: "Instagram",
       link: config?.instagramLink,
-      icon: <FaInstagram />,
+      icon: <PiInstagramLogoDuotone />,
     },
       {
     name: "Google",
     link: config?.googleFormLink,
-    icon: <FaGoogle />,
+    icon: <PiGoogleLogoDuotone />,
   },
     {
       name: "Twitter",
       link: config?.twitterLink,
-      icon: <FaXTwitter />,
+      icon: <PiXLogoDuotone />,
     },
     {
       name: "YouTube",
       link: config?.youtubeLink,
-      icon: <FaYoutube />,
+      icon: <PiYoutubeLogoDuotone />,
     },
     {
       name: "WhatsApp",
       link: config?.whatsAppLink,
-      icon: <IoLogoWhatsapp />,
+      icon: <PiWhatsappLogoDuotone />,
     },
     {
       name: "LinkedIn",
       link: config?.linkedinLink,
-      icon: <FaLinkedinIn />,
+      icon: <PiLinkedinLogoDuotone />,
     },
   ].filter((social) => social.link);
 
@@ -301,17 +309,17 @@ export default function Footer() {
 //     {
 //       name: "Address",
 //       value: "32/6, Laxmi Road, Near Doon International School, Dalanwala, Dehradun",
-//       icon: <FaLocationDot size={20} style={{ color: GOLD }} />,
+//       icon: <PiMapPinDuotone size={22} style={{ color: GOLD }} />,
 //     },
 //     {
 //       name: "Phone",
 //       value: "+91 70783 32794",
-//       icon: <FaPhoneAlt size={20} style={{ color: GOLD }} />,
+//       icon: <PiPhoneCallDuotone size={22} style={{ color: GOLD }} />,
 //     },
 //     {
 //       name: "Email",
 //       value: "gauramakeupstudioandacademy@gmail.com",
-//       icon: <SiGmail size={20} style={{ color: GOLD }} />,
+//       icon: <PiEnvelopeSimpleDuotone size={22} style={{ color: GOLD }} />,
 //     },
 //   ];
 
@@ -468,17 +476,17 @@ export default function Footer() {
 //       name: "Address",
 //       value:
 //         "Plot No. M-10 C.A, Veer Haqiqat Ray Marg, Rudrapur, Uttarakhand - 263153",
-//       icon: <FaLocationDot size={20} className={`${textColor2}`} />,
+//       icon: <PiMapPinDuotone size={22} className={`${textColor2}`} />,
 //     },
 //     {
 //       name: "Phone",
 //       value: "+1 (123) 456-7890",
-//       icon: <FaPhoneAlt size={20} className={`${textColor2}`} />,
+//       icon: <PiPhoneCallDuotone size={22} className={`${textColor2}`} />,
 //     },
 //     {
 //       name: "Email",
 //       value: "schoolgaura@gmail.com",
-//       icon: <SiGmail size={20} className={`${textColor2}`} />,
+//       icon: <PiEnvelopeSimpleDuotone size={22} className={`${textColor2}`} />,
 //     },
 //   ];
 //   return (
