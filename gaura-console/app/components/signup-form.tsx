@@ -174,7 +174,7 @@ export function SignupForm({
           </form>
           <div className="relative hidden md:block bg-black">
             <img
-                src="/public/logo/GAURA.png"
+                src="/logo/GAURA.png"
               alt="Image"
               className="absolute inset-0 h-full w-full object-contain p-5"
             />
