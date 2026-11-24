@@ -113,7 +113,6 @@ export default function Courses({ onContactClick }) {
   return (
     <section className="w-full" style={{ background: BLACK }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -567,7 +566,6 @@ const CourseCategories = ({ category, fn, categories }) => {
 //   return (
 //     <section className="w-full" style={{ background: BLACK }}>
 //       <style>{`
-//         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 //         .no-scrollbar::-webkit-scrollbar { display: none; }
 //         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 //       `}</style>

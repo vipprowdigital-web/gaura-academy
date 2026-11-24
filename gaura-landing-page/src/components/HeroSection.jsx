@@ -109,9 +109,8 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
       onMouseLeave={() => setPaused(false)}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
         .hero-h1 {
-          font-family: 'DM Sans', sans-serif;
+          font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
           font-weight: 300;
           line-height: 1.1;
           letter-spacing: -0.01em;
@@ -122,7 +121,7 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
           .hero-h1 { font-size: clamp(2rem, 4vw, 3.5rem); }
         }
         .hero-h2 {
-          font-family: 'DM Sans', sans-serif;
+          font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
           font-weight: 800;
           letter-spacing: 0.06em;
           color: ${GOLD};
@@ -139,7 +138,7 @@ export default function HeroSection({ onContactClick, onCourseClick }) {
           }
         }
         .hero-sub {
-          font-family: 'DM Sans', sans-serif;
+          font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
           font-size: clamp(0.72rem, 2.5vw, 0.9rem);
           color: rgba(255,255,255,0.65);
           line-height: 1.7;

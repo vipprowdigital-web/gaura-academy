@@ -183,7 +183,6 @@ const handleSubmit = async (e) => {
       style={{ background: BLACK }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
         select option { background: #111000; color: #ffffff; }
         textarea { resize: vertical; }
         ::-webkit-scrollbar { width: 4px; }

@@ -135,7 +135,6 @@ export default function Testimonials() {
       onMouseLeave={() => setPaused(false)}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 
         @keyframes fadeSlideUp {
           from { opacity: 0; transform: translateY(24px); }
@@ -169,7 +168,7 @@ export default function Testimonials() {
         }
 
         .big-quote {
-          font-family: 'DM Sans', sans-serif;
+          font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
           font-size: 12rem;
           line-height: 0.6;
           color: ${YELLOW}14;
@@ -557,7 +556,6 @@ export default function Testimonials() {
 //       onMouseLeave={() => setPaused(false)}
 //     >
 //       <style>{`
-//         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
 
 //         @keyframes fadeSlideUp {
 //           from { opacity: 0; transform: translateY(24px); }
@@ -578,7 +576,7 @@ export default function Testimonials() {
 
 //         /* Big decorative quote mark */
 //         .big-quote {
-//           font-family: 'DM Sans', sans-serif;
+//           font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
 //           font-size: 12rem;
 //           line-height: 0.6;
 //           color: ${YELLOW}14;

@@ -50,7 +50,6 @@ export default function CareerTransformation() {
     >
       {/* Google Fonts */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap');
       `}</style>
 
       {/* ── Background decorative elements ───────────────────── */}
